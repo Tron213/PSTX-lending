@@ -2,8 +2,9 @@
   "name": "pastukh-presentation",
   "version": "1.0.0",
   "private": true,
-  "description": "Презентационный сайт проекта ПАСТУХ",
-  "type": "module",
-  "scripts": { "start": "node server.mjs" },
-  "engines": { "node": ">=18" }
+  "description": "Презентационный сайт ПАСТУХ без серверной части",
+  "scripts": {
+    "start": "powershell -NoProfile -Command \"Start-Process -FilePath './index.html'\"",
+    "dev": "npm start"
+  }
 }
