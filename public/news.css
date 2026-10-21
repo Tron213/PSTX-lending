@@ -1,0 +1,325 @@
+[hidden] {
+  display: none !important;
+}
+.news-main {
+  max-width: 1300px;
+  margin: auto;
+  padding: 65px 6% 90px;
+  min-height: 75vh;
+}
+.news-intro h1 {
+  font-size: clamp(48px, 6vw, 80px);
+}
+.news-intro-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 20px;
+  padding-bottom: 35px;
+}
+.news-intro-bottom .intro {
+  margin: 0;
+}
+.button {
+  border: 0;
+  cursor: pointer;
+}
+.news-toolbar {
+  display: flex;
+  justify-content: space-between;
+  padding: 23px 0;
+  border-block: 1px solid var(--line);
+  font-size: 10px;
+  letter-spacing: 1.7px;
+}
+.news-feed {
+  display: grid;
+  gap: 28px;
+  margin-top: 30px;
+}
+.news-card {
+  background: white;
+  border: 1px solid var(--line);
+  padding: 36px;
+  border-radius: 8px;
+  min-width: 0;
+}
+.news-card time {
+  font-size: 11px;
+  color: var(--muted);
+}
+.news-card h2 {
+  font-size: 34px;
+  margin: 18px 0;
+  overflow-wrap: anywhere;
+}
+.post-body {
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+  line-height: 1.8;
+  max-width: 850px;
+}
+.post-media {
+  display: grid;
+  grid-template-columns: repeat(
+    2,
+    minmax(0, 1fr)
+  );
+  gap: 16px;
+  margin-top: 25px;
+}
+.post-media img,
+.post-media video {
+  width: 100%;
+  max-height: 500px;
+  object-fit: contain;
+  background: #e9eddf;
+  border-radius: 6px;
+}
+.post-media > :only-child {
+  grid-column: 1/-1;
+}
+.post-actions {
+  display: flex;
+  gap: 16px;
+  margin-top: 25px;
+  border-top: 1px solid var(--line);
+  padding-top: 20px;
+}
+.secondary {
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  padding: 10px 15px;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+}
+.empty {
+  padding: 55px 25px;
+  text-align: center;
+  border: 1px dashed #bbc5af;
+  border-radius: 8px;
+}
+.empty h2 {
+  font-size: 34px;
+}
+.empty p {
+  color: var(--muted);
+  margin-bottom: 0;
+}
+dialog {
+  width: min(750px, calc(100% - 30px));
+  border: 1px solid var(--line);
+  border-radius: 12px;
+  background: var(--paper);
+  color: var(--ink);
+  padding: 32px;
+  max-height: 90dvh;
+}
+dialog::backdrop {
+  background: #102b22a8;
+}
+dialog h2 {
+  font-size: 35px;
+}
+.editor-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: start;
+}
+.editor-top .secondary {
+  font-size: 22px;
+  padding: 2px 12px;
+}
+label {
+  display: block;
+  font-size: 13px;
+  margin: 18px 0 10px;
+}
+input,
+textarea {
+  display: block;
+  width: 100%;
+  font: inherit;
+  font-size: 16px;
+  color: var(--ink);
+  background: white;
+  border: 1px solid #bdc7b3;
+  border-radius: 4px;
+  padding: 12px;
+  margin-top: 8px;
+}
+textarea {
+  resize: vertical;
+}
+input:focus,
+textarea:focus {
+  outline: 2px solid #809e36;
+}
+.hint {
+  font-size: 12px;
+  color: var(--muted);
+}
+.attachment {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 15px;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--line);
+  font-size: 12px;
+  overflow-wrap: anywhere;
+}
+.form-actions {
+  display: flex;
+  gap: 15px;
+  margin-top: 22px;
+}
+button:disabled {
+  opacity: 0.55;
+  cursor: wait;
+}
+#form-message,
+#message {
+  font-size: 14px;
+}
+.header nav [aria-current] {
+  font-weight: bold;
+  border-bottom: 2px solid var(--ink);
+}
+@media (max-width: 720px) {
+  .news-main {
+    padding: 40px 6% 60px;
+  }
+  .news-intro-bottom {
+    align-items: start;
+    flex-direction: column;
+  }
+  .news-card {
+    padding: 22px;
+  }
+  .post-media {
+    grid-template-columns: 1fr;
+  }
+  .news-card h2 {
+    font-size: 29px;
+  }
+  dialog {
+    padding: 22px;
+  }
+  .header nav {
+    gap: 0;
+  }
+}
+@media (min-width: 721px)
+  and (max-width: 1100px) {
+  .header nav {
+    gap: 14px;
+    font-size: 12px;
+  }
+  .header .nav-cta {
+    padding: 10px;
+  }
+}
+
+.admin-help {
+  padding: 22px 26px;
+  background: #e9eddf;
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  margin-bottom: 30px;
+  font-size: 14px;
+}
+.admin-help summary {
+  cursor: pointer;
+  font-weight: 600;
+}
+.admin-help li {
+  line-height: 1.8;
+  margin: 9px 0;
+}
+.admin-help p {
+  color: var(--muted);
+}
+.login-card {
+  max-width: 560px;
+  margin: 70px auto;
+  padding: 40px;
+  background: white;
+  border: 1px solid var(--line);
+  border-radius: 10px;
+}
+.login-card h1 {
+  font-size: 42px;
+}
+.login-card .button {
+  margin: 12px 0 22px;
+}
+.login-card .hint {
+  margin: 0;
+}
+.admin-nav {
+  display: flex !important;
+  gap: 20px !important;
+}
+.admin-page .header {
+  gap: 16px;
+}
+@media (max-width: 720px) {
+  .admin-page .header {
+    height: auto;
+    min-height: 80px;
+    flex-wrap: wrap;
+    padding-top: 18px;
+    padding-bottom: 18px;
+  }
+  .admin-page .header .admin-nav {
+    position: static;
+    border: 0;
+    padding: 0;
+    flex-direction: row;
+    font-size: 12px;
+  }
+  .admin-page .header .admin-nav a {
+    padding: 8px 0;
+  }
+  .login-card {
+    margin: 30px 5%;
+    padding: 25px;
+  }
+  .login-card h1 {
+    font-size: 34px;
+  }
+}
+.password-field {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+}
+.password-field input {
+  min-width: 0;
+  margin-top: 0;
+}
+.password-field button {
+  flex-shrink: 0;
+  font-size: 12px;
+}
+.admin-nav {
+  flex-wrap: wrap;
+}
+.admin-nav button {
+  font-size: 12px;
+}
+#login-button {
+  width: 100%;
+  justify-content: center;
+  margin: 8px 0 20px;
+}
+#login-message,
+#settings-message {
+  font-size: 14px;
+  line-height: 1.6;
+}
+#settings {
+  max-width: 600px;
+}

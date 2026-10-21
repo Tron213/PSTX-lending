@@ -1,0 +1,134 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width,initial-scale=1"
+    />
+    <title>Новости — ПАСТУХ</title>
+    <link
+      rel="icon"
+      href="/assets/mark.svg"
+    />
+    <link
+      rel="stylesheet"
+      href="/styles.css"
+    />
+    <link
+      rel="stylesheet"
+      href="/news.css"
+    />
+    <script
+      src="/news.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <header class="header">
+      <a
+        class="brand"
+        href="/#home"
+        aria-label="ПАСТУХ — главная"
+      >
+        <img
+          src="assets/mark.svg"
+          alt=""
+          width="34"
+          height="34"
+        />
+        ПАСТУХ
+        <span>agrotech project</span>
+      </a>
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="nav"
+        aria-label="Открыть меню"
+      >
+        ☰
+      </button>
+      <nav
+        id="nav"
+        aria-label="Основная навигация"
+      >
+        <a href="/#about">О проекте</a>
+        <a href="/#system">Технология</a>
+        <a href="/#analytics">
+          Аналитика
+        </a>
+        <a href="/#roadmap">Развитие</a>
+        <a
+          class="nav-cta"
+          href="/#materials"
+        >
+          Материалы
+          <span>↗</span>
+        </a>
+        <a
+          href="/news"
+          aria-current="page"
+        >
+          Новости
+        </a>
+      </nav>
+    </header>
+    <main class="news-main">
+      <section class="news-intro">
+        <p class="eyebrow">
+          <span class="dot"></span>
+          ПАСТУХ / ДНЕВНИК ПРОЕКТА
+        </p>
+        <h1>
+          Растём.
+          <br />
+          <em>И делимся новым.</em>
+        </h1>
+        <div class="news-intro-bottom">
+          <p class="intro">
+            Нововведения, фотографии и
+            видео.
+            <br />
+            История развития ПАСТУХа — шаг
+            за шагом.
+          </p>
+        </div>
+      </section>
+      <div class="news-toolbar">
+        <span>НОВОСТИ ПРОЕКТА</span>
+        <span id="count"></span>
+      </div>
+      <p
+        id="message"
+        role="status"
+        aria-live="polite"
+      ></p>
+      <section
+        id="feed"
+        class="news-feed"
+        aria-label="Публикации"
+      ></section>
+    </main>
+
+    <footer>
+      <a
+        class="brand"
+        href="/"
+      >
+        <img
+          src="/assets/mark.svg"
+          width="28"
+          height="28"
+          alt=""
+        />
+        ПАСТУХ
+      </a>
+      <p>
+        Технологии для тех, кто растёт.
+      </p>
+      <a href="/">На главную ↗</a>
+      <a href="/admin">Админ-панель</a>
+      <span>© 2026</span>
+    </footer>
+  </body>
+</html>

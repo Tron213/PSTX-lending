@@ -1,0 +1,146 @@
+const $ = (s) =>
+  document.querySelector(s);
+let posts = [],
+  canEdit = false,
+  editing = null,
+  media = [],
+  pending = [],
+  busy = false;
+const el = (tag, text, cls) => {
+  const n = document.createElement(tag);
+  if (text) n.textContent = text;
+  if (cls) n.className = cls;
+  return n;
+};
+async function api(url, options) {
+  const r = await fetch(url, options);
+  const data = await r.json();
+  if (!r.ok)
+    throw Error(
+      data.error ||
+        'Не удалось выполнить зап' +
+          'рос',
+    );
+  return data;
+}
+function render() {
+  const feed = $('#feed');
+  feed.replaceChildren();
+  $('#count').textContent = posts.length
+    ? String(posts.length).padStart(
+        2,
+        '0',
+      )
+    : '';
+  if (!posts.length) {
+    const n = el('div', null, 'empty');
+    n.append(
+      el(
+        'p',
+        'ДНЕВНИК ПРОЕКТА',
+        'eyebrow',
+      ),
+      el(
+        'h2',
+        'Здесь начинается новая и' +
+          'стория.',
+      ),
+      el(
+        'p',
+        canEdit
+          ? 'Добавьте первую новость ' +
+              '— расскажите об обновлен' +
+              'ии, покажите фото или ви' +
+              'део.'
+          : 'Здесь появятся новости и' +
+              ' материалы о развитии пр' +
+              'оекта.',
+      ),
+    );
+    feed.append(n);
+    return;
+  }
+  for (const post of posts) {
+    const n = el(
+        'article',
+        null,
+        'news-card',
+      ),
+      time = el(
+        'time',
+        new Date(
+          post.date,
+        ).toLocaleDateString('ru-RU', {
+          day: 'numeric',
+          month: 'long',
+          year: 'numeric',
+        }),
+      );
+    time.dateTime = post.date;
+    n.append(
+      time,
+      el('h2', post.title),
+      el('p', post.body, 'post-body'),
+    );
+    const gallery = el(
+      'div',
+      null,
+      'post-media',
+    );
+    for (const m of post.media) {
+      const asset = el(
+        m.type === 'video'
+          ? 'video'
+          : 'img',
+      );
+      asset.src = '/api/media/' + m.id;
+      if (m.type === 'video') {
+        asset.controls = true;
+        asset.preload = 'metadata';
+        asset.playsInline = true;
+        asset.setAttribute(
+          'aria-label',
+          m.name,
+        );
+      } else {
+        asset.alt = m.name;
+        asset.loading = 'lazy';
+      }
+      gallery.append(asset);
+    }
+    n.append(gallery);
+    feed.append(n);
+  }
+}
+async function load() {
+  try {
+    const d = await api('/api/news');
+    posts = d.posts;
+    canEdit = false;
+    $('#message').textContent = '';
+    render();
+  } catch (e) {
+    $('#message').replaceChildren(
+      document.createTextNode(
+        'Не удалось загрузить нов' +
+          'ости. ',
+      ),
+    );
+    const retry = el(
+      'button',
+      'Повторить',
+      'secondary',
+    );
+    retry.onclick = load;
+    $('#message').append(retry);
+  }
+}
+$('.menu-toggle').onclick = () => {
+  const open =
+    $('#nav').classList.toggle('open');
+  $('.menu-toggle').setAttribute(
+    'aria-expanded',
+    String(open),
+  );
+};
+load();

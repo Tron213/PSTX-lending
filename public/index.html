@@ -1,0 +1,1163 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="
+        width=device-width, initial-scale=1
+      "
+    />
+    <meta
+      name="theme-color"
+      content="#183d2e"
+    />
+    <meta
+      name="description"
+      content="
+        ПАСТУХ — комплект технологий для
+        наблюдения за развитием телят.
+        Автоматический учёт веса, история
+        измерений и аналитика развития.
+      "
+    />
+    <title>
+      ПАСТУХ — забота, основанная на
+      данных
+    </title>
+    <link
+      rel="icon"
+      href="assets/mark.svg"
+      type="image/svg+xml"
+    />
+    <link
+      rel="stylesheet"
+      href="styles.css"
+    />
+    <script
+      src="script.js"
+      defer
+    ></script>
+    <link
+      rel="stylesheet"
+      href="components.css"
+    />
+    <script
+      src="components.js"
+      defer
+    ></script>
+  </head>
+  <body>
+    <a
+      class="skip"
+      href="#about"
+    >
+      Перейти к содержанию
+    </a>
+    <header class="header">
+      <a
+        class="brand"
+        href="#home"
+        aria-label="ПАСТУХ — главная"
+      >
+        <img
+          src="assets/mark.svg"
+          alt=""
+          width="34"
+          height="34"
+        />
+        ПАСТУХ
+        <span>agrotech project</span>
+      </a>
+      <button
+        class="menu-toggle"
+        aria-expanded="false"
+        aria-controls="nav"
+        aria-label="Открыть меню"
+      >
+        ☰
+      </button>
+      <nav
+        id="nav"
+        aria-label="Основная навигация"
+      >
+        <a href="#about">О проекте</a>
+        <a href="#system">Технология</a>
+        <a href="#analytics">Аналитика</a>
+        <a href="#roadmap">Развитие</a>
+        <a
+          class="nav-cta"
+          href="#materials"
+        >
+          Материалы
+          <span>↗</span>
+        </a>
+        <a href="/news">Новости</a>
+      </nav>
+    </header>
+    <main>
+      <section
+        class="hero"
+        id="home"
+      >
+        <div class="hero-copy">
+          <p class="eyebrow">
+            <span class="dot"></span>
+            ТЕХНОЛОГИИ ДЛЯ МОЛОДНЯКА
+          </p>
+          <h1>
+            Большое будущее
+            <br />
+            начинается
+            <br />
+            с
+            <em>маленьких.</em>
+          </h1>
+          <p class="intro">
+            ПАСТУХ помогает наблюдать за
+            развитием телят: от первого
+            измерения веса до данных, на
+            которые можно опереться.
+          </p>
+          <div class="hero-actions">
+            <a
+              class="button"
+              href="#system"
+            >
+              Как работает система
+              <span>↗</span>
+            </a>
+            <a
+              class="text-link"
+              href="#analytics"
+            >
+              Посмотреть пример
+              <span>→</span>
+            </a>
+          </div>
+          <div class="hero-caption">
+            <span>01 / НАБЛЮДЕНИЕ</span>
+            <span>
+              Каждый телёнок. Своя
+              история.
+            </span>
+          </div>
+        </div>
+        <div class="hero-art">
+          <div class="art-top">
+            <span>
+              <i></i>
+              ПАСТУХ / КОНЦЕПЦИЯ СТЕНДА
+            </span>
+            <span>RFID + ВЕС</span>
+          </div>
+          <svg
+            class="calf-scene"
+            viewBox="0 0 640 640"
+            role="img"
+            aria-label="
+              Иллюстрация телёнка на весовой
+              платформе с идентификационной меткой
+            "
+          >
+            <defs>
+              <linearGradient
+                id="bg"
+                x2="1"
+                y2="1"
+              >
+                <stop
+                  stop-color="#335745"
+                />
+                <stop
+                  offset="1"
+                  stop-color="#163b2b"
+                />
+              </linearGradient>
+              <linearGradient
+                id="fur"
+                x2=".6"
+                y2="1"
+              >
+                <stop
+                  stop-color="#f5eedb"
+                />
+                <stop
+                  offset="1"
+                  stop-color="#c8c7ae"
+                />
+              </linearGradient>
+              <pattern
+                id="grid"
+                width="42"
+                height="42"
+                patternUnits="userSpaceOnUse"
+              >
+                <path
+                  d="M 42 0 L 0 0 0 42"
+                  fill="none"
+                  stroke="#a9c2a5"
+                  stroke-opacity=".08"
+                />
+              </pattern>
+            </defs>
+            <rect
+              width="640"
+              height="640"
+              fill="url(#bg)"
+            />
+            <rect
+              width="640"
+              height="640"
+              fill="url(#grid)"
+            />
+            <circle
+              cx="333"
+              cy="288"
+              r="204"
+              fill="none"
+              stroke="#a8c6a2"
+              stroke-opacity=".13"
+            />
+            <circle
+              cx="333"
+              cy="288"
+              r="165"
+              fill="none"
+              stroke="#a8c6a2"
+              stroke-opacity=".13"
+              stroke-dasharray="4 8"
+            />
+            <path
+              d="
+                M0 538 Q160 462 305 536 T640 491
+                V640 H0Z
+              "
+              fill="#264f38"
+            />
+            <path
+              d="M0 590 Q240 477 640 581"
+              fill="none"
+              stroke="#91a67d"
+              opacity=".25"
+            />
+            <ellipse
+              cx="322"
+              cy="496"
+              rx="211"
+              ry="43"
+              fill="#0c291f"
+              opacity=".5"
+            />
+            <g
+              id="scale-piece"
+              data-part="scale"
+            >
+              <path
+                d="
+                  M140 461 L389 431 512 468 270
+                  508Z
+                "
+                fill="#94a497"
+              />
+              <path
+                d="
+                  M140 461 V479 L270 528 512 485
+                  V468 L270 508Z
+                "
+                fill="#547367"
+              />
+              <path
+                d="
+                  M159 462 L390 442 490 469 270
+                  496Z
+                "
+                fill="none"
+                stroke="#bfd1b1"
+              />
+            </g>
+            <path
+              d="
+                M206 283 Q170 316 180 360 Q195 414
+                289 406 L384 389 Q430 370 415 313
+                Q401 267 345 266Z
+              "
+              fill="url(#fur)"
+            />
+            <path
+              d="
+                M188 305 Q206 267 255 279 L277 323
+                245 363 194 349Z
+              "
+              fill="#5b4536"
+            />
+            <path
+              d="
+                M316 271 Q375 257 407 299 L393 347
+                352 330 326 305Z
+              "
+              fill="#725343"
+            />
+            <path
+              d="
+                M207 372 L211 456 Q219 466 234 457
+                L246 381
+              "
+              fill="#d7d4bb"
+            />
+            <path
+              d="
+                M288 389 L291 470 Q302 480 315 469
+                L324 387
+              "
+              fill="#eee7d1"
+            />
+            <path
+              d="
+                M354 371 L352 444 Q360 455 373 446
+                L382 365
+              "
+              fill="#aeb5a1"
+            />
+            <path
+              d="
+                M395 354 L399 435 Q410 448 422 435
+                L422 342
+              "
+              fill="#e3deca"
+            />
+            <path
+              d="
+                M210 446 L210 460 Q223 468 236 459
+                L235 449Z M291 460 L291 475 Q305
+                482 317 471 L317 460Z M351 439
+                L351 449 Q362 456 376 446 L374
+                436Z M399 429 L399 441 Q412 449
+                425 437 L423 427Z
+              "
+              fill="#3b3c31"
+            />
+            <path
+              d="
+                M186 297 Q166 289 158 315 L153 384
+              "
+              fill="none"
+              stroke="#d2cab4"
+              stroke-width="9"
+              stroke-linecap="round"
+            />
+            <path
+              d="
+                M154 373 L147 397 159 405 163 383Z
+              "
+              fill="#5b4536"
+            />
+            <path
+              d="
+                M385 291 Q403 265 410 244 L456 227
+                Q486 242 480 276 L463 326 Q433 359
+                400 330Z
+              "
+              fill="url(#fur)"
+            />
+            <path
+              d="
+                M412 246 Q380 216 358 229 Q370 256
+                408 268Z
+              "
+              fill="#d2cab7"
+            />
+            <path
+              d="
+                M455 234 Q484 202 503 219 Q493 248
+                470 254Z
+              "
+              fill="#d8d2bd"
+            />
+            <path
+              d="
+                M417 250 Q425 237 440 240 L448 275
+                430 291 412 276Z
+              "
+              fill="#674a39"
+            />
+            <path
+              d="
+                M438 302 Q468 294 473 311 Q467 338
+                440 336 Q420 329 426 316Z
+              "
+              fill="#bdab96"
+            />
+            <ellipse
+              cx="452"
+              cy="314"
+              rx="4"
+              ry="3"
+              fill="#504639"
+            />
+            <ellipse
+              cx="424"
+              cy="280"
+              rx="4"
+              ry="5"
+              fill="#172c21"
+            />
+            <circle
+              cx="425"
+              cy="279"
+              r="1.2"
+              fill="white"
+            />
+            <g
+              id="rfid-piece"
+              data-part="rfid"
+            >
+              <path
+                d="
+                  M390 249 L406 250 403 274 388
+                  271Z
+                "
+                fill="#d4ed84"
+              />
+              <circle
+                cx="398"
+                cy="255"
+                r="2"
+                fill="#54703e"
+              />
+            </g>
+            <path
+              d="M398 254 L371 185 176 185"
+              fill="none"
+              stroke="#d4ed84"
+              stroke-width="1.5"
+            />
+            <circle
+              cx="398"
+              cy="254"
+              r="6"
+              fill="none"
+              stroke="#d4ed84"
+            />
+            <text
+              x="96"
+              y="169"
+              fill="#d4ed84"
+              font-family="Arial,sans-serif"
+              font-size="12"
+              letter-spacing="2"
+            >
+              01 / RFID-МЕТКА
+            </text>
+            <path
+              d="M450 487 L485 538 567 538"
+              fill="none"
+              stroke="#b9cdb5"
+            />
+            <text
+              x="446"
+              y="563"
+              fill="#b9cdb5"
+              font-family="Arial,sans-serif"
+              font-size="11"
+              letter-spacing="1.5"
+            >
+              02 / ВЕСОВАЯ ПЛАТФОРМА
+            </text>
+          </svg>
+          <button
+            class="component-trigger rfid-trigger"
+            type="button"
+            data-part="rfid"
+            aria-label="Конструкция RFID-метки"
+            aria-haspopup="dialog"
+            aria-controls="component-dialog"
+          >
+            <span aria-hidden="true">
+              +
+            </span>
+            <span
+              class="component-tooltip"
+            >
+              RFID-метка · конструкция
+            </span>
+          </button>
+          <button
+           class="component-trigger scale-trigger"
+            type="button"
+            data-part="scale"
+            aria-label="Конструкция весов"
+            aria-haspopup="dialog"
+            aria-controls="component-dialog"
+          >
+            <span aria-hidden="true">
+              +
+            </span>
+            <span
+              class="component-tooltip"
+            >
+              Весы · конструкция
+            </span>
+          </button>
+          <div class="floating-card">
+            <span class="scan-icon">
+              ⌁
+            </span>
+            <div>
+              <small>
+                Идентификация по метке
+              </small>
+              <strong>
+                Измерение → в историю
+              </strong>
+            </div>
+            <span class="check">✓</span>
+          </div>
+          <div class="art-bottom">
+            <span>
+              Нажмите +, чтобы изучить
+              конструкцию
+            </span>
+            <span>ПАСТУХ © 2026</span>
+          </div>
+        </div>
+      </section>
+      <div class="ticker">
+        <span>МЕТКА</span>
+        <i>↗</i>
+        <span>ИЗМЕРЕНИЕ</span>
+        <i>↗</i>
+        <span>ИСТОРИЯ</span>
+        <i>↗</i>
+        <span>АНАЛИТИКА</span>
+        <i>↗</i>
+        <span>РЕШЕНИЕ</span>
+      </div>
+      <section
+        class="section about"
+        id="about"
+      >
+        <div>
+          <p class="eyebrow">
+            01 / ПОЧЕМУ ЭТО ВАЖНО
+          </p>
+          <h2>
+            Ранний рост
+            <br />
+            заслуживает
+            <br />
+            <em>внимания.</em>
+          </h2>
+        </div>
+        <div class="about-copy">
+          <p class="large-text">
+            За каждым измерением —
+            животное, которому нужна
+            своевременная забота.
+          </p>
+          <p>
+            При ручном учёте история веса
+            зависит от регулярности
+            измерений и записей.
+            Зоотехнику сложнее увидеть,
+            когда рост замедлился, а когда
+            телёнок начал терять вес.
+          </p>
+          <p>
+            ПАСТУХ объединяет
+            идентификацию и автоматическую
+            запись измерений. Данные о
+            каждом телёнке собираются в
+            единую историю, доступную
+            через интернет.
+          </p>
+          <div class="note">
+            <span>↳</span>
+            <p>
+              Фокус проекта — молодые
+              телята и динамика их
+              развития.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section system"
+        id="system"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">
+              02 / КАК ЭТО РАБОТАЕТ
+            </p>
+            <h2>
+              Один проход.
+              <br />
+              <em>
+                Новая точка в истории.
+              </em>
+            </h2>
+          </div>
+          <p>
+            От измерения на ферме
+            <br />
+            до наблюдения за развитием.
+          </p>
+        </div>
+        <div class="steps">
+          <article>
+            <span class="step-number">
+              01
+            </span>
+            <div class="step-icon">⌁</div>
+            <h3>Узнать телёнка</h3>
+            <p>
+              Метка связывает животное с
+              его индивидуальной
+              карточкой. Система
+              определяет, кто зашёл на
+              весы.
+            </p>
+          </article>
+          <article>
+            <span class="step-number">
+              02
+            </span>
+            <div class="step-icon">⇥</div>
+            <h3>Записать вес</h3>
+            <p>
+              Результат измерения
+              автоматически сохраняется с
+              привязкой к телёнку.
+              Переносить каждую запись
+              вручную не нужно.
+            </p>
+          </article>
+          <article>
+            <span class="step-number">
+              03
+            </span>
+            <div class="step-icon">≋</div>
+            <h3>Сохранить историю</h3>
+            <p>
+              Данные хранятся на сервере.
+              Зоотехник может
+              просматривать измерения и
+              отслеживать динамику через
+              интернет.
+            </p>
+          </article>
+        </div>
+      </section>
+      <section
+        class="section analytics"
+        id="analytics"
+      >
+        <div class="analytics-copy">
+          <p class="eyebrow">
+            03 / ОТ ДАННЫХ К ВНИМАНИЮ
+          </p>
+          <h2>
+            Видеть динамику.
+            <br />
+            <em>Замечать изменения.</em>
+          </h2>
+          <p>
+            История измерений помогает
+            наблюдать за развитием каждого
+            телёнка. Следующий этап —
+            ИИ-аналитика, которая выделит
+            остановку роста и потерю веса
+            и поднимет проблемных животных
+            в начало списка.
+          </p>
+          <div class="demo-note">
+            Интерактивный пример •
+            условные данные
+            <br />
+            Показывает концепцию
+            интерфейса, а не действующий
+            кабинет.
+          </div>
+          <a
+            class="text-link"
+            href="#roadmap"
+          >
+            Что дальше в проекте
+            <span>→</span>
+          </a>
+        </div>
+        <div class="dashboard">
+          <div class="dashboard-head">
+            <div>
+              <span class="mini-label">
+                ПАСТУХ / ИСТОРИЯ РОСТА
+              </span>
+              <h3>Карточка телёнка</h3>
+            </div>
+            <span class="demo-badge">
+              ДЕМО
+            </span>
+          </div>
+          <div
+            class="animal-tabs"
+            role="group"
+            aria-label="Выбор примера"
+          >
+            <button
+              class="active"
+              data-animal="stable"
+              aria-pressed="true"
+            >
+              № 024 · рост
+            </button>
+            <button
+              data-animal="attention"
+              aria-pressed="false"
+            >
+              № 017 · отклонение
+            </button>
+          </div>
+          <div class="reading">
+            <div>
+              <span>
+                Последнее измерение
+              </span>
+              <strong id="weight">
+                68,4
+                <small>кг</small>
+              </strong>
+            </div>
+            <span
+              class="status"
+              id="status"
+            >
+              Положительная динамика
+            </span>
+          </div>
+          <svg
+            class="chart"
+            viewBox="0 0 480 205"
+            role="img"
+            aria-labelledby="
+              chart-title chart-desc
+            "
+          >
+            <title id="chart-title">
+              Демонстрационный график веса
+            </title>
+            <desc id="chart-desc">
+              Вес растёт с 42 до 68,4
+              килограмма за 5 недель.
+            </desc>
+            <defs>
+              <linearGradient
+                id="area"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  stop-color="#d4ed84"
+                  stop-opacity=".6"
+                />
+                <stop
+                  offset="1"
+                  stop-color="#d4ed84"
+                  stop-opacity="0"
+                />
+              </linearGradient>
+            </defs>
+            <g stroke="#e4e8df">
+              <path
+                d="
+                  M40 25H455M40 75H455M40
+                  125H455M40 175H455
+                "
+              />
+            </g>
+            <g
+              fill="#7d857c"
+              font-family="Arial,sans-serif"
+              font-size="11"
+            >
+              <text
+                x="5"
+                y="29"
+              >
+                70
+              </text>
+              <text
+                x="5"
+                y="79"
+              >
+                60
+              </text>
+              <text
+                x="5"
+                y="129"
+              >
+                50
+              </text>
+              <text
+                x="5"
+                y="179"
+              >
+                40
+              </text>
+              <text
+                x="34"
+                y="201"
+              >
+                01 нед.
+              </text>
+              <text
+                x="136"
+                y="201"
+              >
+                02
+              </text>
+              <text
+                x="238"
+                y="201"
+              >
+                03
+              </text>
+              <text
+                x="340"
+                y="201"
+              >
+                04
+              </text>
+              <text
+                x="438"
+                y="201"
+              >
+                05
+              </text>
+            </g>
+            <path
+              id="chart-area"
+              d="
+                M40 165L143 131L246 96L349 62L452
+                33V175H40Z
+              "
+              fill="url(#area)"
+            />
+            <path
+              id="chart-line"
+              d="
+                M40 165L143 131L246 96L349 62L452
+                33
+              "
+              fill="none"
+              stroke="#34543c"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <g
+              id="chart-points"
+              fill="#34543c"
+            >
+              <circle
+                cx="40"
+                cy="165"
+                r="4"
+              />
+              <circle
+                cx="143"
+                cy="131"
+                r="4"
+              />
+              <circle
+                cx="246"
+                cy="96"
+                r="4"
+              />
+              <circle
+                cx="349"
+                cy="62"
+                r="4"
+              />
+              <circle
+                cx="452"
+                cy="33"
+                r="5"
+              />
+            </g>
+          </svg>
+          <p class="chart-caption">
+            Возраст, недели · масса, кг
+          </p>
+          <div
+            class="insight"
+            aria-live="polite"
+          >
+            <span>↗</span>
+            <p id="insight-text">
+              В этом примере вес
+              увеличивается при каждом
+              измерении. История позволяет
+              увидеть устойчивый рост.
+            </p>
+          </div>
+        </div>
+      </section>
+      <section class="section value">
+        <p class="eyebrow">
+          04 / КОМУ ПОМОГАЕТ ПРОЕКТ
+        </p>
+        <div class="value-grid">
+          <h2>
+            Данные полезны,
+            <br />
+            когда помогают
+            <br />
+            <em>действовать.</em>
+          </h2>
+          <div>
+            <article>
+              <span>01</span>
+              <div>
+                <h3>Зоотехнику</h3>
+                <p>
+                  Просматривать историю
+                  веса и наблюдать за
+                  телятами, которым
+                  требуется больше
+                  внимания.
+                </p>
+              </div>
+            </article>
+            <article>
+              <span>02</span>
+              <div>
+                <h3>Ферме</h3>
+                <p>
+                  Собирать измерения в
+                  единую систему и
+                  сокращать ручной перенос
+                  результатов.
+                </p>
+              </div>
+            </article>
+            <article>
+              <span>03</span>
+              <div>
+                <h3>
+                  Для селекционной работы
+                </h3>
+                <p>
+                  В перспективе —
+                  связывать телят с
+                  родителями и сравнивать
+                  развитие потомства
+                  разных пар с учётом
+                  условий содержания.
+                </p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+      <section
+        class="section roadmap"
+        id="roadmap"
+      >
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow">
+              05 / НАПРАВЛЕНИЯ РАЗВИТИЯ
+            </p>
+            <h2>
+              От веса —
+              <br />
+              <em>
+                к целостной картине.
+              </em>
+            </h2>
+          </div>
+          <p>
+            Текущая основа и следующие
+            шаги
+            <br />
+            по описанию команды проекта.
+          </p>
+        </div>
+        <div class="roadmap-grid">
+          <article class="current">
+            <span class="stage-label">
+              ОСНОВА ПРОЕКТА
+            </span>
+            <h3>Метка, вес, сервер</h3>
+            <p>
+              Идентификация телёнка,
+              автоматическая запись веса и
+              хранение истории измерений.
+            </p>
+            <span class="stage-footer">
+              Базовый контур системы
+              <span>↗</span>
+            </span>
+          </article>
+          <article>
+            <span class="stage-label">
+              В ПЛАНАХ
+            </span>
+            <h3>Температура</h3>
+            <p>
+              Внешний измеритель
+              температуры в стенде —
+              дополнительный параметр для
+              наблюдения за состоянием
+              телёнка.
+            </p>
+            <span class="stage-footer">
+              Развитие измерительного
+              стенда
+              <span>↗</span>
+            </span>
+          </article>
+          <article>
+            <span class="stage-label">
+              НАПРАВЛЕНИЕ РАЗВИТИЯ
+            </span>
+            <h3>ИИ и родословные</h3>
+            <p>
+              Выявление отклонений роста,
+              приоритетный список для
+              осмотра и сравнение
+              потомства разных
+              родительских пар.
+            </p>
+            <span class="stage-footer">
+              Аналитика и рекомендации
+              <span>↗</span>
+            </span>
+          </article>
+        </div>
+        <p class="roadmap-note">
+          Показатели точности и
+          эффективность системы предстоит
+          подтвердить испытаниями.
+          Аналитика помогает специалисту
+          принимать решения; оценка
+          состояния животного остаётся за
+          специалистом.
+        </p>
+      </section>
+      <section
+        class="materials"
+        id="materials"
+      >
+        <div>
+          <p class="eyebrow">
+            ПАСТУХ / МАТЕРИАЛЫ ПРОЕКТА
+          </p>
+          <h2>
+            Начнём с наблюдения.
+            <br />
+            <em>Продолжим заботой.</em>
+          </h2>
+          <p>
+            Краткое описание технологии,
+            целей и направлений развития —
+            в одном файле для знакомства с
+            проектом.
+          </p>
+          <a
+            class="button light"
+            href="assets/pastukh-project.txt"
+            download
+          >
+            Скачать описание проекта
+            <span>↓</span>
+          </a>
+        </div>
+        <div class="materials-side">
+          <span class="orbit">↗</span>
+          <p>
+            Технологии
+            <br />
+            для тех, кто растёт.
+          </p>
+          <span>
+            НАУЧНЫЙ ПРОЕКТ / ПАСТУХ
+          </span>
+        </div>
+      </section>
+    </main>
+    <dialog
+      id="component-dialog"
+      class="component-dialog"
+      aria-labelledby="component-title"
+      aria-describedby="component-summary"
+    >
+      <button
+        type="button"
+        class="component-close"
+        aria-label="Закрыть описание конструкции"
+        autofocus
+      >
+        ×
+      </button>
+      <div class="component-layout">
+        <div class="component-assembly">
+          <p class="eyebrow">
+            КОНСТРУКЦИЯ / СХЕМА
+          </p>
+          <div
+            class="assembly-layers"
+            id="component-layers"
+          ></div>
+          <p class="assembly-note">
+            Условная схема, не рабочий
+            чертёж.
+          </p>
+        </div>
+        <div class="component-copy">
+          <p
+            class="component-placeholder"
+          >
+            ЗАПОЛНИТЕЛЬ · ПРИМЕР
+            КОНСТРУКЦИИ
+          </p>
+          <h2 id="component-title"></h2>
+          <p id="component-summary"></p>
+          <div
+            id="component-sections"
+          ></div>
+          <p class="component-footnote">
+            Материалы и состав приведены
+            для примера. Замените их
+            подтверждёнными данными
+            проекта.
+          </p>
+        </div>
+      </div>
+    </dialog>
+    <footer>
+      <a href="/admin">Админ-панель</a>
+      <a
+        class="brand"
+        href="#home"
+      >
+        <img
+          src="assets/mark.svg"
+          alt=""
+          width="28"
+          height="28"
+        />
+        ПАСТУХ
+      </a>
+      <p>
+        Наблюдение за развитием и
+        здоровьем телят.
+      </p>
+      <a href="#home">Наверх ↑</a>
+      <span>© 2026</span>
+    </footer>
+  </body>
+</html>
