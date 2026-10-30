@@ -4,147 +4,169 @@ const componentDetails = {
   rfid: {
     title: 'RFID-метка',
     summary:
-      'Метка связывает телёнка с карточкой ' +
-      'в системе. Ниже — пример её устройства.',
+      'Метка связывает телёнка ' +
+      'с карточкой ' +
+      ('в системе. Ниже — пример' +
+        ' её устройства.'),
     layers: [
       'Защитный корпус',
       'Антенна и RFID-чип',
-      'Элемент крепления'
+      'Элемент крепления',
     ],
     sections: [
       {
         title: 'Из чего сделана',
         text:
-          'Пример: корпус из полимера, ' +
-          'проводящая антенна и RFID-чип. ' +
-          'Точные материалы нужно уточнить.'
+          'Пример: корпус из полиме' +
+          'ра, ' +
+          ('проводящая антенна и RFI' +
+            'D-чип. ') +
+          ('Точные материалы нужно у' +
+            'точнить.'),
       },
       {
         title: 'Как устроена',
         text:
-          'Чип хранит идентификатор. Антенна ' +
-          'обеспечивает связь со считывателем. ' +
-          'Корпус защищает внутренние элементы.'
+          'Чип хранит идентификатор' +
+          '. Антенна ' +
+          ('обеспечивает связь со сч' +
+            'итывателем. ') +
+          ('Корпус защищает внутренн' +
+            'ие элементы.'),
       },
       {
         title: 'Что уточнить',
         text:
-          'Тип метки, частоту, дальность ' +
-          'считывания, способ крепления ' +
-          'и требования к безопасности.'
-      }
-    ]
+          'Тип метки, частоту, даль' +
+          'ность ' +
+          ('считывания, способ крепл' +
+            'ения ') +
+          ('и требования к безопасно' +
+            'сти.'),
+      },
+    ],
   },
   scale: {
     title: 'Весовая платформа',
     summary:
-      'Весы фиксируют массу телёнка. ' +
-      'Ниже — пример состава стенда.',
+      'Весы фиксируют массу тел' +
+      'ёнка. ' +
+      ('Ниже — пример состава ст' +
+        'енда.'),
     layers: [
       'Настил платформы',
       'Датчики нагрузки',
-      'Опорная рама'
+      'Опорная рама',
     ],
     sections: [
       {
         title: 'Из чего сделана',
         text:
-          'Пример: металлическая рама, ' +
-          'настил с нескользящей поверхностью ' +
-          'и тензометрические датчики.'
+          'Пример: металлическая ра' +
+          'ма, ' +
+          ('настил с нескользящей по' +
+            'верхностью ') +
+          ('и тензометрические датчи' +
+            'ки.'),
       },
       {
         title: 'Как устроена',
         text:
-          'Платформа передаёт нагрузку ' +
-          'на датчики. Измерительный модуль ' +
-          'обрабатывает сигнал, а система ' +
-          'связывает вес с меткой животного.'
+          'Платформа передаёт нагру' +
+          'зку ' +
+          ('на датчики. Измерительны' +
+            'й модуль ') +
+          ('обрабатывает сигнал, а с' +
+            'истема ') +
+          ('связывает вес с меткой ж' +
+            'ивотного.'),
       },
       {
         title: 'Что уточнить',
         text:
-          'Габариты, предел взвешивания, ' +
-          'точность, защиту от влаги, ' +
-          'способ очистки и подключения.'
-      }
-    ]
-  }
+          'Габариты, предел взвешив' +
+          'ания, ' +
+          ('точность, защиту от влаг' +
+            'и, ') +
+          ('способ очистки и подключ' +
+            'ения.'),
+      },
+    ],
+  },
 };
-
 // Ниже — поведение интерактивных элементов.
 const partDialog = document.querySelector(
-  '#component-dialog'
+  '#component-dialog',
 );
 const partScene = document.querySelector(
-  '.hero-art'
+  '.hero-art',
 );
-const partButtons = document.querySelectorAll(
-  '.component-trigger'
-);
-const partShapes = document.querySelectorAll(
-  '.calf-scene [data-part]'
-);
+const partButtons =
+  document.querySelectorAll(
+    '.component-trigger',
+  );
+const partShapes =
+  document.querySelectorAll(
+    '.calf-scene [data-part]',
+  );
 let partOpener = null;
-
 function highlightPart(part) {
   partScene.dataset.activePart = part;
 }
-
 function clearPartHighlight() {
   delete partScene.dataset.activePart;
 }
-
 function renderPartLayers(details) {
-  const container = document.querySelector(
-    '#component-layers'
-  );
-
-  container.replaceChildren();
-
-  details.layers.forEach((label, index) => {
-    const layer = document.createElement('div');
-    const number = document.createElement('span');
-    const text = document.createElement('span');
-
-    layer.className = 'assembly-layer';
-    number.textContent = String(index + 1);
-    text.textContent = label;
-    layer.append(number, text);
-    container.append(layer);
-  });
-}
-
-function renderPartSections(details) {
-  const container = document.querySelector(
-    '#component-sections'
-  );
-
-  container.replaceChildren();
-
-  details.sections.forEach(section => {
-    const block = document.createElement(
-      'section'
+  const container =
+    document.querySelector(
+      '#component-layers',
     );
-    const title = document.createElement('h3');
-    const text = document.createElement('p');
-
+  container.replaceChildren();
+  details.layers.forEach(
+    (label, index) => {
+      const layer =
+        document.createElement('div');
+      const number =
+        document.createElement('span');
+      const text =
+        document.createElement('span');
+      layer.className = 'assembly-layer';
+      number.textContent = String(
+        index + 1,
+      );
+      text.textContent = label;
+      layer.append(number, text);
+      container.append(layer);
+    },
+  );
+}
+function renderPartSections(details) {
+  const container =
+    document.querySelector(
+      '#component-sections',
+    );
+  container.replaceChildren();
+  details.sections.forEach((section) => {
+    const block =
+      document.createElement('section');
+    const title =
+      document.createElement('h3');
+    const text =
+      document.createElement('p');
     title.textContent = section.title;
     text.textContent = section.text;
     block.append(title, text);
     container.append(block);
   });
 }
-
 function openPart(part, opener) {
   const details = componentDetails[part];
   const title = document.querySelector(
-    '#component-title'
+    '#component-title',
   );
   const summary = document.querySelector(
-    '#component-summary'
+    '#component-summary',
   );
-
   partOpener = opener;
   title.textContent = details.title;
   summary.textContent = details.summary;
@@ -152,79 +174,92 @@ function openPart(part, opener) {
   renderPartLayers(details);
   renderPartSections(details);
   clearPartHighlight();
-  document.body.classList.add('detail-open');
+  document.body.classList.add(
+    'detail-open',
+  );
   partDialog.showModal();
 }
-
-partButtons.forEach(button => {
+partButtons.forEach((button) => {
   const part = button.dataset.part;
-
-  button.addEventListener('pointerenter', () => {
-    highlightPart(part);
-  });
+  button.addEventListener(
+    'pointerenter',
+    () => {
+      highlightPart(part);
+    },
+  );
   button.addEventListener('focus', () => {
     highlightPart(part);
   });
   button.addEventListener(
     'pointerleave',
-    clearPartHighlight
+    clearPartHighlight,
   );
   button.addEventListener(
     'blur',
-    clearPartHighlight
+    clearPartHighlight,
   );
   button.addEventListener('click', () => {
     openPart(part, button);
   });
 });
-
-partShapes.forEach(shape => {
+partShapes.forEach((shape) => {
   const part = shape.dataset.part;
-  const selector = '.component-trigger' +
-    `[data-part="${part}"]`;
-  const button = document.querySelector(selector);
-
-  shape.addEventListener('pointerenter', () => {
-    highlightPart(part);
-  });
+  const selector =
+    '.component-trigger' +
+    ('[data-part="' + part + '"]');
+  const button =
+    document.querySelector(selector);
+  shape.addEventListener(
+    'pointerenter',
+    () => {
+      highlightPart(part);
+    },
+  );
   shape.addEventListener(
     'pointerleave',
-    clearPartHighlight
+    clearPartHighlight,
   );
   shape.addEventListener('click', () => {
     openPart(part, button);
   });
 });
-
 const partClose = document.querySelector(
-  '.component-close'
+  '.component-close',
 );
-
-partClose.addEventListener('click', () => {
-  partDialog.close();
-});
-
-// Щелчок по затемнённому фону закрывает окно.
-partDialog.addEventListener('click', event => {
-  if (event.target !== partDialog) {
-    return;
-  }
-
-  const box = partDialog.getBoundingClientRect();
-  const outside = (
-    event.clientX < box.left ||
-    event.clientX > box.right ||
-    event.clientY < box.top ||
-    event.clientY > box.bottom
-  );
-
-  if (outside) {
+partClose.addEventListener(
+  'click',
+  () => {
     partDialog.close();
-  }
-});
-
+  },
+);
+// Щелчок по затемнённому фону закрывает окно.
+partDialog.addEventListener(
+  'click',
+  (event) => {
+    if (event.target !== partDialog) {
+      return;
+    }
+    const box =
+      partDialog.getBoundingClientRect();
+    const outside =
+      event.clientX < box.left ||
+      event.clientX > box.right ||
+      event.clientY < box.top ||
+      event.clientY > box.bottom;
+    if (outside) {
+      partDialog.close();
+    }
+  },
+);
 // Escape обрабатывается самим элементом dialog.
-partDialog.addEventListener('close', () => {
-  document.body.classList.remove('detail-open');
-  partOpener?.focus({ preventScroll: true });
-});
+partDialog.addEventListener(
+  'close',
+  () => {
+    document.body.classList.remove(
+      'detail-open',
+    );
+    partOpener?.focus({
+      preventScroll: true,
+    });
+  },
+);

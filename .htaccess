@@ -1,0 +1,14 @@
+# Optional Apache 2.4 protection.
+# The PHP routes work without rewrites.
+<IfModule mod_authz_core.c>
+  <FilesMatch "^(README\.md|\.gitignore)$">
+    Require all denied
+  </FilesMatch>
+</IfModule>
+<IfModule mod_alias.c>
+  RedirectMatch 404 /\.(git|pastukh)(/|$)
+</IfModule>
+<IfModule mod_php.c>
+  php_value post_max_size 64M
+  php_value upload_max_filesize 50M
+</IfModule>
