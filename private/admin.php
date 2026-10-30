@@ -23,10 +23,10 @@ if (!defined('PASTUKH')) {
     />
     <link
       rel="stylesheet"
-      href="/news.css"
+      href="/news.css?v=20261030-date"
     />
     <script
-      src="/admin.js"
+      src="/admin.js?v=20261030-date"
       defer
     ></script>
   </head>

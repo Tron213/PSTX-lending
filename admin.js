@@ -70,12 +70,13 @@ function render() {
       ),
       time = el(
         'time',
-        new Date(
+        'Опубликовано: ' + new Date(
           post.date,
         ).toLocaleDateString('ru-RU', {
           day: 'numeric',
           month: 'long',
           year: 'numeric',
+          timeZone: 'Asia/Yekaterinburg',
         }),
       );
     time.dateTime = post.date;
