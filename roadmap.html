@@ -1,0 +1,53 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1" />
+  <title>Путь проекта — ПАСТУХ</title>
+  <link rel="icon" href="/assets/mark.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <link rel="stylesheet" href="/news.css" />
+  <link rel="stylesheet" href="/roadmap.css" />
+  <script src="/roadmap.js?v=path1" defer></script>
+</head>
+<body>
+  <header class="header">
+    <a class="brand" href="/">
+      <img src="/assets/mark.svg" width="34"
+        height="34" alt="" />ПАСТУХ
+    </a>
+    <nav aria-label="Основная навигация">
+      <a href="/">Главная</a>
+      <a href="/news.html">Новости</a>
+      <a href="/roadmap.html"
+        aria-current="page">Путь проекта</a>
+    </nav>
+  </header>
+  <main class="news-main">
+    <p class="eyebrow">ПАСТУХ / ПУТЬ ПРОЕКТА</p>
+    <h1>От идеи<br />к готовому продукту.</h1>
+    <p class="intro">Задумки, работа команды
+      и полученные результаты — по этапам.
+      Порядок и состояние этапов обновляет команда.</p>
+    <nav class="path-filters"
+      aria-label="Состояние этапов">
+      <a href="/roadmap.html" data-state="">
+        Весь путь
+      </a>
+      <a href="/roadmap.html?state=done"
+        data-state="done">Выполнено</a>
+      <a href="/roadmap.html?state=development"
+        data-state="development">В разработке</a>
+    </nav>
+    <p id="path-summary"></p>
+    <p id="path-message" role="status"
+      aria-live="polite">Загрузка пути проекта…</p>
+    <ol id="path-stages" class="path-list"></ol>
+  </main>
+  <footer>
+    <a href="/">ПАСТУХ · На главную</a>
+    <a href="/admin/roadmap.php">Админ-панель</a>
+  </footer>
+</body>
+</html>

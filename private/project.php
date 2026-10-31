@@ -6,7 +6,7 @@ function project_templates() {
     'passport' => 'Паспорт проекта',
     'team' => 'Команда проекта',
     'prototype' => 'Прототип в действии',
-    'trials' => 'Дневник испытаний',
+    'trials' => 'Ход проекта',
     'pilot' => 'Участие хозяйств в пилоте',
     'materials' => 'Материалы проекта',
     'faq' => 'Вопросы о системе',
@@ -37,6 +37,9 @@ function project_safe_url($url) {
     return true;
   }
   // Only explicitly public local paths.
+  if (preg_match(
+      '~^/roadmap\.html(?:\?state=(?:done|development))?$~D',
+      $url)) return true;
   if (preg_match(
       '~^/news\.html(?:\?kind=(?:trial|trial-plan|news))?(?:#post-[a-f0-9-]{36})?$~D',
       $url)) {

@@ -7,6 +7,7 @@ require __DIR__ . '/private/auth.php';
 require __DIR__ . '/private/news.php';
 require __DIR__ . '/private/media.php';
 require __DIR__ . '/private/project.php';
+require __DIR__ . '/private/roadmap.php';
 header('Content-Type: application/json; '
   . 'charset=utf-8');
 header('Cache-Control: no-store');
@@ -17,6 +18,7 @@ try {
   $m = $_SERVER['REQUEST_METHOD'];
   if ($a === 'news') news_action($m);
   if ($a === 'project') project_action($m);
+  if ($a === 'roadmap') roadmap_action($m);
   if ($a === 'uploads') upload_action($m);
   if ($a === 'media') media_action($m);
   $auth = ['login', 'logout',

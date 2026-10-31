@@ -22,8 +22,8 @@ const trialLabels = {
 };
 const kindLabel = (kind) => ({
   news: 'Новость',
-  trial: 'Результат испытания',
-  'trial-plan': 'План испытания',
+  trial: 'Материал проекта',
+  'trial-plan': 'Материал проекта',
 }[kind] || 'Новость');
 function appendTrial(node, post) {
   if (!post.trial || post.kind === 'news')
@@ -38,24 +38,16 @@ function appendTrial(node, post) {
   node.append(list);
 }
 function renderFilters() {
-  const filter = new URLSearchParams(
-    location.search).get('kind');
-  const nav = el('nav', null,
-    'news-filters');
-  nav.setAttribute('aria-label',
-    'Тип публикаций');
-  for (const [label, href, active] of [
-    ['Все записи', '/news.html', !filter],
-    ['Испытания', '/news.html?kind=trial',
-      filter === 'trial'],
-    ['Планы проверок',
-      '/news.html?kind=trial-plan',
-      filter === 'trial-plan'],
+  const nav = el('nav', null, 'news-filters');
+  nav.setAttribute('aria-label', 'Новости и путь проекта');
+  for (const [label, href] of [
+    ['Новости', '/news.html'],
+    ['Выполнено', '/roadmap.html?state=done'],
+    ['В разработке', '/roadmap.html?state=development'],
   ]) {
     const link = el('a', label, 'secondary');
     link.href = href;
-    if (active) link.setAttribute(
-      'aria-current', 'page');
+    if (href === '/news.html') link.setAttribute('aria-current', 'page');
     nav.append(link);
   }
   $('#feed').before(nav);
@@ -169,15 +161,7 @@ function render() {
 async function load() {
   try {
     const d = await api('/api.php?action=news');
-    const kind = new URLSearchParams(
-      location.search).get('kind');
-    posts = d.posts.filter((post) =>
-      kind === 'trial'
-        ? ['trial', 'trial-plan'].includes(
-          post.kind)
-        : kind === 'trial-plan'
-          ? post.kind === 'trial-plan'
-          : true);
+    posts = d.posts;
     canEdit = false;
     $('#message').textContent = '';
     render();

@@ -187,11 +187,24 @@ try {
   });
   const adminHtml = await adminPage.text();
   check(adminPage.status === 200
-    && adminHtml.includes('id="project-editor"')
+    && !adminHtml.includes('id="project-editor"')
     && !adminHtml.includes('id="herd"')
     && !adminHtml.includes('admin-herd.js')
-    && adminHtml.includes('id="trial-fields"'),
-  'Admin page integrates all workspace panels');
+    && adminHtml.includes('id="save-draft"'),
+  'News workspace is separate from project planning');
+  const pathPage = await fetch(origin
+    + '/admin/roadmap.php', { headers: { Cookie: cookie } });
+  const pathHtml = await pathPage.text();
+  check(pathPage.status === 200
+    && pathHtml.includes('id="roadmap-editor"')
+    && !pathHtml.includes('id="post-form"')
+    && !pathHtml.includes('src="/admin.js'),
+  'Roadmap has its own admin page without news editor');
+  const contentPage = await fetch(origin
+    + '/admin/content.php', { headers: { Cookie: cookie } });
+  check(contentPage.status === 200
+    && (await contentPage.text()).includes('id="project-editor"'),
+  'Existing editorial content remains editable separately');
   const guestPage = await fetch(origin
     + '/admin/index.php', { redirect: 'manual' });
   check(guestPage.status === 303
@@ -202,6 +215,7 @@ try {
   for (const action of [
     'news&scope=admin',
     'project&scope=admin',
+    'roadmap&scope=admin',
   ]) {
     check((await request(action)).status
       === 401, 'Guest blocked: ' + action);
@@ -458,6 +472,53 @@ try {
   check(await fs.readFile(legacyHerd, 'utf8')
     === legacyRecord,
   'Existing private animal data stays untouched');
+  const initialPath = await request('roadmap&scope=admin', { admin: true });
+  check(initialPath.data.stages.length === 8
+    && initialPath.data.stages.every(s => s.state === 'idea'
+      && !s.visible && s.description.length > 100),
+  'Roadmap begins with detailed private ideas, not invented progress');
+  check((await request('roadmap')).data.stages.length === 0,
+    'Unconfirmed ideas stay private');
+  const pathData = structuredClone(initialPath.data);
+  pathData.stages[0].description = 'PRIVATE_PATH_SENTINEL';
+  check((await request('roadmap', { method: 'PUT', data: pathData }))
+    .status === 401, 'Guest cannot change roadmap');
+  check((await request('roadmap', { method: 'PUT', admin: true,
+    origin: false, data: pathData })).status === 403,
+  'Roadmap changes require matching Origin');
+  let pathSaved = await request('roadmap', { method: 'PUT',
+    admin: true, data: pathData });
+  check(pathSaved.status === 200
+    && !(await request('roadmap')).text.includes('PRIVATE_PATH_SENTINEL'),
+  'Hidden idea descriptions are excluded server-side');
+  check((await request('roadmap', { method: 'PUT', admin: true,
+    data: pathData })).status === 409,
+  'Outdated editor cannot overwrite newer roadmap');
+  pathData.revision = pathSaved.data.revision;
+  pathData.stages[1].state = 'done';
+  check((await request('roadmap', { method: 'PUT', admin: true,
+    data: pathData })).status === 400,
+  'Completed stage requires an actual result');
+  pathData.stages[1].result = 'Confirmed result of this isolated test';
+  pathData.stages[1].visible = true;
+  pathData.stages[2].state = 'development';
+  pathData.stages[2].visible = true;
+  pathData.stages.reverse();
+  pathSaved = await request('roadmap', { method: 'PUT', admin: true,
+    data: pathData });
+  const publicPath = (await request('roadmap')).data.stages;
+  check(pathSaved.status === 200 && publicPath.length === 2
+    && publicPath[0].state === 'development'
+    && publicPath[1].state === 'done',
+  'Public project path follows admin order and visibility');
+  check((await request('roadmap&state=done')).data.stages.length === 1
+    && (await request('roadmap&state=development')).data.stages.length === 1,
+  'Done and development filters use real stage states');
+  pathData.revision = pathSaved.data.revision;
+  pathData.stages.forEach(s => { s.visible = false; });
+  await request('roadmap', { method: 'PUT', admin: true, data: pathData });
+  check((await request('roadmap')).data.stages.length === 0,
+    'Unpublishing stages removes them from public path');
   console.log(checks + ' API checks passed.');
 } catch (error) {
   console.error(error.message);

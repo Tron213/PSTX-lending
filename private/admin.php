@@ -26,10 +26,14 @@ require __DIR__ . '/questions.php';
       rel="stylesheet"
       href="/news.css?v=20261031"
     />
-    <script
-      src="/admin.js?v=20261031"
-      defer
-    ></script>
+    <?php if ($adminView === 'news'): ?>
+    <script src="/admin.js?v=path1" defer></script>
+    <?php endif; ?>
+    <script src="/admin-shell.js?v=path1" defer></script>
+    <link rel="stylesheet" href="/roadmap.css?v=path1" />
+    <?php if ($adminView === 'roadmap'): ?>
+    <script src="/admin-roadmap.js?v=path1" defer></script>
+    <?php endif; ?>
     <link rel="stylesheet"
       href="/admin-project.css?v=20261031" />
     <script src="/admin-project.js?v=20261031"
@@ -75,14 +79,21 @@ require __DIR__ . '/questions.php';
     <main class="news-main">
       <nav class="workspace-nav"
         aria-label="Разделы кабинета">
-        <a href="#project-editor">Сайт</a>
-        <a href="#news-admin">Дневник</a>
-        <a href="#inbox">Обращения</a>
+        <a href="/admin/index.php" <?= $adminView === 'news'
+          ? 'aria-current="page"' : '' ?>>Новости</a>
+        <a href="/admin/roadmap.php" <?= $adminView === 'roadmap'
+          ? 'aria-current="page"' : '' ?>>Путь проекта</a>
+        <a href="/admin/content.php" <?= $adminView === 'content'
+          ? 'aria-current="page"' : '' ?>>Материалы сайта</a>
+        <a href="/admin/index.php#inbox">Обращения</a>
       </nav>
-      <?php
-      require __DIR__ . '/project-editor.php';
-      require __DIR__ . '/concept-notes.php';
-      ?>
+      <p id="shell-message" role="status"></p>
+      <?php if ($adminView === 'roadmap'):
+        require __DIR__ . '/roadmap-panel.php';
+      elseif ($adminView === 'content'):
+        require __DIR__ . '/project-editor.php';
+        require __DIR__ . '/concept-notes.php';
+      else: ?>
       <?php require __DIR__ . '/inbox.php'; ?>
       <section class="news-intro" id="news-admin">
         <p class="eyebrow">
@@ -90,9 +101,7 @@ require __DIR__ . '/questions.php';
           ПАСТУХ / АДМИНИСТРИРОВАНИЕ
         </p>
         <h1>
-          Новости
-          <br />
-          и испытания.
+          Новости проекта.
         </h1>
         <div class="news-intro-bottom">
           <p class="intro">
@@ -163,7 +172,9 @@ require __DIR__ . '/questions.php';
         class="news-feed"
         aria-label="Публикации"
       ></section>
+      <?php endif; ?>
     </main>
+    <?php if ($adminView === 'news'): ?>
     <dialog
       id="editor"
       aria-labelledby="editor-title"
@@ -249,6 +260,7 @@ require __DIR__ . '/questions.php';
         </div>
       </form>
     </dialog>
+    <?php endif; ?>
     <dialog
       id="settings"
       aria-labelledby="settings-title"

@@ -10,6 +10,7 @@ try {
       true, 303);
     exit;
   }
+  $adminView = $adminView ?? 'news';
   require __DIR__ . '/../private/admin.php';
 } catch (Throwable $error) {
   http_response_code(500);

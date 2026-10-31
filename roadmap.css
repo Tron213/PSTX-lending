@@ -1,0 +1,93 @@
+.path-toolbar, .path-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 24px 0;
+}
+.path-panel, .path-stage {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 10px;
+  margin: 16px 0;
+  overflow-wrap: anywhere;
+}
+.path-panel summary {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 14px;
+  cursor: pointer;
+  padding: 24px;
+}
+.path-number {
+  color: var(--muted);
+  font-size: 13px;
+}
+.path-badge {
+  font-size: 12px;
+  padding: 6px 12px;
+  background: #e9eddf;
+  border-radius: 30px;
+}
+.path-panel-body, .path-stage {
+  padding: 28px;
+}
+.path-panel-body label {
+  display: block;
+  margin-bottom: 20px;
+  font-size: 14px;
+}
+.path-panel input:not([type="checkbox"]),
+.path-panel textarea, .path-panel select {
+  display: block;
+  width: 100%;
+  font: inherit;
+  margin-top: 8px;
+  padding: 12px;
+  border: 1px solid #b6c694;
+  border-radius: 5px;
+  background: white;
+}
+.path-panel .path-check {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+.path-stage h2 {
+  font-size: clamp(25px, 3vw, 36px);
+  margin-top: 18px;
+}
+.path-stage p, .path-stage dd {
+  white-space: pre-wrap;
+  line-height: 1.65;
+}
+.path-stage dt {
+  font-weight: bold;
+  margin-top: 18px;
+}
+.path-stage dd { margin: 8px 0; }
+.path-filters a {
+  border: 1px solid var(--line);
+  background: white;
+  border-radius: 5px;
+  padding: 12px 18px;
+}
+.path-filters a[aria-current="page"] {
+  background: var(--ink);
+  color: white;
+}
+.workspace-nav a[aria-current="page"] {
+  background: var(--ink);
+  color: white;
+}
+.path-list { list-style: none; padding: 0; }
+.path-stage[data-state="done"] {
+  border-left: 5px solid #809e36;
+}
+.path-stage[data-state="development"] {
+  border-left: 5px solid #d4b45f;
+}
+@media(max-width: 540px) {
+  .path-panel summary { padding: 18px; }
+  .path-panel-body, .path-stage { padding: 20px; }
+}
