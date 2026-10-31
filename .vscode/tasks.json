@@ -1,0 +1,27 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "ПАСТУХ: PHP",
+      "type": "shell",
+      "command": "php",
+      "args": [
+        "-S", "127.0.0.1:8000",
+        "scripts/preview-router.php"
+      ],
+      "isBackground": true,
+      "problemMatcher": {
+        "owner": "php-preview",
+        "pattern": {
+          "regexp": "^(NO_MATCH)$",
+          "message": 1
+        },
+        "background": {
+          "activeOnStart": true,
+          "beginsPattern": ".*Development Server.*",
+          "endsPattern": ".*started.*"
+        }
+      }
+    }
+  ]
+}

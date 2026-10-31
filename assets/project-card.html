@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport"
+    content="width=device-width,initial-scale=1" />
+  <title>ПАСТУХ — карточка проекта</title>
+  <link rel="icon" href="/assets/mark.svg" />
+  <style>
+    * { box-sizing: border-box; }
+    body {
+      font-family: Arial, sans-serif;
+      color: #183d2e;
+      background: #f6f6ed;
+      margin: 0;
+      padding: 40px 24px;
+    }
+    main { max-width: 820px; margin: auto; }
+    h1 { font-size: 56px; margin: 28px 0 12px; }
+    h2 { font-size: 20px; margin-top: 28px; }
+    p, li { line-height: 1.6; }
+    .lead { font-size: 24px; }
+    .stamp { font-size: 13px; letter-spacing: 2px; }
+    .note { padding: 18px; background: #e9eddf; }
+    a { color: inherit; }
+    nav { display: flex; gap: 24px; }
+    button { font: inherit; cursor: pointer; }
+    footer { margin-top: 32px; font-size: 13px; }
+    @media print {
+      body { background: white; padding: 0; }
+      nav { display: none; }
+      a { text-decoration: none; }
+      main { max-width: none; }
+      h1 { margin-top: 0; }
+      @page { size: A4; margin: 18mm; }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <nav>
+      <a href="/">← На сайт</a>
+      <button type="button" id="print-card">
+        Печать / сохранить в PDF
+      </button>
+    </nav>
+    <h1>ПАСТУХ</h1>
+    <p class="lead">Платформа анализа состояния
+      телят и учёта хозяйства</p>
+    <p class="stamp">КАРТОЧКА ПРОЕКТА · ОКТЯБРЬ 2026</p>
+    <h2>Задача</h2>
+    <p>Объединить измерения веса и историю
+      развития телёнка, чтобы специалисту было
+      проще отслеживать динамику и замечать
+      изменения в данных.</p>
+    <h2>Целевой принцип работы</h2>
+    <p>Идентификация по метке → измерение веса →
+      запись в историю животного → обзор группы
+      и хозяйства.</p>
+    <h2>Направления разработки</h2>
+    <ul>
+      <li>Связь измерительного стенда
+        с карточкой животного.</li>
+      <li>История веса, учёт животных
+        и сводка по группе.</li>
+      <li>Проверка качества измерений
+        и информативности уведомлений.</li>
+      <li>В перспективе — дополнительные
+        параметры и цифровая модель хозяйства.</li>
+    </ul>
+    <p class="note">На публичном сайте показан
+      интерактивный пример отдельного приложения
+      на условных данных. Реальный учёт будет
+      выполняться в отдельном приложении.
+      Характеристики оборудования, точность
+      и эффективность должны подтверждаться
+      испытаниями. Данные поддерживают работу
+      специалиста.</p>
+    <h2>Сотрудничество</h2>
+    <p>Команда открыта к обсуждению задач хозяйств,
+      методики испытаний и партнёрства.
+      Для связи используйте форму на сайте.</p>
+    <footer>
+      <a href="https://pt.2035.university/project/svinopas">
+        Карточка на платформе 2035
+      </a>
+    </footer>
+  </main>
+  <script src="/assets/project-card.js"></script>
+</body>
+</html>

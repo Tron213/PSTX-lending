@@ -85,16 +85,28 @@ function renderChart(points) {
   const area = document.querySelector(
     '#chart-area',
   );
-  const circles =
-    document.querySelectorAll(
-      '#chart-points circle',
+  const pointGroup = document.querySelector(
+    '#chart-points',
+  );
+  while (pointGroup.children.length
+      < points.length) {
+    const circle = document.createElementNS(
+      'http://www.w3.org/2000/svg', 'circle',
     );
+    circle.setAttribute('r', '4');
+    pointGroup.append(circle);
+  }
+  while (pointGroup.children.length
+      > points.length) {
+    pointGroup.lastElementChild.remove();
+  }
+  const circles = pointGroup.children;
   line.setAttribute('d', path);
   area.setAttribute(
     'd',
     '' + path + 'V175H40Z',
   );
-  circles.forEach((circle, index) => {
+  Array.from(circles).forEach((circle, index) => {
     circle.setAttribute(
       'cx',
       points[index][0],
@@ -141,7 +153,8 @@ function transitionChart(points) {
     const nextPoints = points.map(
       (point, index) => {
         const [x, y] = point;
-        const [oldX, oldY] = from[index];
+        const [oldX, oldY] = from[index]
+          || from.at(-1) || point;
         const nextX =
           oldX + (x - oldX) * ease;
         const nextY =
@@ -280,142 +293,184 @@ if (
     },
   );
 }
-// Условные данные, а не реальные измерения.
+// Три вымышленных сценария отдельного приложения.
+// Состояние существует только в памяти страницы.
 const examples = {
   stable: {
+    tag: '024', group: 'А',
     weights: [42, 48.8, 55.8, 62.6, 68.4],
+    nextWeight: 69.8,
     status: 'Положительная динамика',
-    description:
-      'Вес растёт с 42 до 68,4 ' +
-      'килограмма ' +
-      'за 5 недель.',
-    insight:
-      'В этом примере вес увели' +
-      'чивается ' +
-      ('при каждом измерении. Ис' +
-        'тория ') +
-      ('позволяет увидеть устойч' +
-        'ивый рост.'),
+    insight: 'В этом примере масса растёт. '
+      + 'История помогает увидеть динамику '
+      + 'каждого условного телёнка.',
   },
   attention: {
+    tag: '017', group: 'А',
     weights: [43, 49.6, 55.2, 55.4, 52.8],
-    status: 'Обратить внимание',
-    description:
-      'Вес сначала растёт, зате' +
-      'м почти ' +
-      ('не меняется и снижается ' +
-        'с 55,4 ') +
-      'до 52,8 килограмма.',
-    insight:
-      'В этом примере после зам' +
-      'едления роста ' +
-      ('вес снижается. Такая дин' +
-        'амика — повод ') +
-      ('для осмотра специалистом' +
-        '.'),
+    nextWeight: 53,
+    status: 'Изменение в примере',
+    insight: 'В условных данных есть снижение '
+      + 'веса. Так приложение могло бы выделить '
+      + 'запись для проверки специалистом.',
+  },
+  balanced: {
+    tag: '031', group: 'Б',
+    weights: [45, 50, 55, 59.5, 62.4],
+    nextWeight: 63.8,
+    status: 'Плавный рост',
+    insight: 'Ещё один условный телёнок '
+      + 'из другой группы. При выборе меняются '
+      + 'карточка, история и график.',
   },
 };
-// Подсветка выбранного примера.
+const simulated = new Set();
+let selectedExample = 'stable';
+const demoNumber = new Intl.NumberFormat('ru-RU', {
+  maximumFractionDigits: 1,
+});
+function demoWeights(key) {
+  const example = examples[key];
+  return simulated.has(key)
+    ? [...example.weights, example.nextWeight]
+    : [...example.weights];
+}
 function updateTabs(button) {
-  const tabs = document.querySelectorAll(
-    '[data-animal]',
+  document.querySelectorAll('[data-animal]')
+    .forEach(tab => {
+      const active = tab === button;
+      tab.classList.toggle('active', active);
+      tab.setAttribute('aria-pressed',
+        String(active));
+    });
+}
+function updateWeight(weights) {
+  const weight = document.querySelector('#weight');
+  const unit = document.createElement('small');
+  unit.textContent = 'кг';
+  weight.replaceChildren(
+    document.createTextNode(
+      demoNumber.format(weights.at(-1)) + ' ',
+    ), unit,
   );
-  tabs.forEach((tab) => {
-    const active = tab === button;
-    tab.classList.toggle(
-      'active',
-      active,
-    );
-    tab.setAttribute(
-      'aria-pressed',
-      String(active),
-    );
+}
+function updateHistory(weights) {
+  const body = document.querySelector(
+    '#demo-history-body',
+  );
+  body.replaceChildren();
+  weights.forEach((weight, index) => {
+    const row = document.createElement('tr');
+    const period = document.createElement('td');
+    const mass = document.createElement('td');
+    period.textContent = (index + 1) + '-я неделя';
+    mass.textContent = demoNumber.format(weight);
+    row.append(period, mass);
+    body.append(row);
   });
 }
-// Последнее измерение и единица измерения.
-function updateWeight(example) {
-  const weight =
-    document.querySelector('#weight');
-  const lastWeight =
-    example.weights.at(-1);
-  const value =
-    lastWeight.toLocaleString('ru-RU');
-  const text = document.createTextNode(
-    value + ' ',
+function updateWeekLabels(count) {
+  const existing = Array.from(
+    document.querySelectorAll('[data-week-label]'),
   );
-  const unit =
-    document.createElement('small');
-  unit.textContent = 'кг';
-  weight.replaceChildren(text, unit);
-}
-// Пояснение появляется после переключения.
-function animateInsight() {
-  if (reducedMotion.matches) {
-    return;
-  }
-  const insight =
-    document.querySelector('.insight');
-  insight
-    .getAnimations()
-    .forEach((animation) => {
-      animation.cancel();
-    });
-  insight.animate(
-    [
-      {
-        opacity: 0.5,
-        transform: 'translateY(5px)',
-      },
-      {
-        opacity: 1,
-        transform: 'translateY(0)',
-      },
-    ],
-    {
-      duration: 350,
-      easing: 'ease-out',
-    },
-  );
-}
-// Обновление карточки при выборе примера.
-function selectExample(button) {
-  const selected = button.dataset.animal;
-  const example = examples[selected];
-  const points = example.weights.map(
-    (weight, index) => {
-      const x = 40 + index * 103;
-      const y = 175 - (weight - 40) * 5;
-      return [x, y];
-    },
-  );
-  const status =
-    document.querySelector('#status');
-  const description =
-    document.querySelector('#chart-desc');
-  const insightText =
-    document.querySelector(
-      '#insight-text',
+  const group = existing[0].parentElement;
+  existing.forEach(label => label.remove());
+  for (let index = 0; index < count; index++) {
+    const label = document.createElementNS(
+      'http://www.w3.org/2000/svg', 'text',
     );
+    label.setAttribute('data-week-label', '');
+    label.setAttribute('x', String(
+      40 + index * 412 / (count - 1) - 6,
+    ));
+    label.setAttribute('y', '201');
+    label.textContent = String(index + 1)
+      .padStart(2, '0');
+    group.append(label);
+  }
+}
+function animateInsight() {
+  if (reducedMotion.matches) return;
+  const insight = document.querySelector('.insight');
+  insight.getAnimations().forEach(a => a.cancel());
+  insight.animate([
+    { opacity: .5, transform: 'translateY(5px)' },
+    { opacity: 1, transform: 'translateY(0)' },
+  ], { duration: 350, easing: 'ease-out' });
+}
+function selectExample(button, message) {
+  selectedExample = button.dataset.animal;
+  const example = examples[selectedExample];
+  const weights = demoWeights(selectedExample);
+  const points = weights.map((weight, index) => [
+    40 + index * 412 / (weights.length - 1),
+    175 - (weight - 40) * 5,
+  ]);
   updateTabs(button);
   transitionChart(points);
-  updateWeight(example);
+  updateWeekLabels(weights.length);
+  updateWeight(weights);
+  updateHistory(weights);
+  const status = document.querySelector('#status');
   status.textContent = example.status;
-  status.classList.toggle(
-    'warn',
-    selected === 'attention',
-  );
-  description.textContent =
-    example.description;
-  insightText.textContent =
+  status.classList.toggle('warn',
+    selectedExample === 'attention');
+  document.querySelector('#demo-card-title')
+    .textContent = 'Карточка № ' + example.tag
+      + ' · группа ' + example.group;
+  document.querySelector('#chart-desc').textContent =
+    'Условный пример № ' + example.tag + ': '
+      + weights.map(w => demoNumber.format(w))
+        .join(', ') + ' кг; по одной точке '
+      + 'на каждую неделю. Это вымышленные данные.';
+  document.querySelector('#insight-text').textContent =
     example.insight;
+  const hasNewPoint = simulated.has(selectedExample);
+  const add = document.querySelector(
+    '#demo-measurement',
+  );
+  add.disabled = hasNewPoint;
+  add.textContent = hasNewPoint
+    ? 'Условная точка добавлена'
+    : 'Показать новое измерение';
+  document.querySelector('#demo-announcement')
+    .textContent = message || 'Выбран пример № '
+      + example.tag + '. Последнее условное '
+      + 'измерение: '
+      + demoNumber.format(weights.at(-1)) + ' кг.';
+  document.querySelectorAll('[data-roster-weight]')
+    .forEach(label => {
+      label.textContent = demoNumber.format(
+        demoWeights(label.dataset.rosterWeight)
+          .at(-1),
+      ) + ' кг';
+    });
   animateInsight();
 }
-const exampleButtons =
-  document.querySelectorAll(
-    '[data-animal]',
-  );
-exampleButtons.forEach((button) => {
+const exampleButtons = document.querySelectorAll(
+  '[data-animal]',
+);
+exampleButtons.forEach(button => {
   button.addEventListener('click', () => {
     selectExample(button);
   });
 });
+document.querySelector('#demo-measurement')
+  .addEventListener('click', () => {
+    if (simulated.has(selectedExample)) return;
+    simulated.add(selectedExample);
+    const button = document.querySelector(
+      '[data-animal="' + selectedExample + '"]',
+    );
+    selectExample(button,
+      'В пример добавлена шестая условная точка. '
+        + 'Никакие данные на сервер не отправлены.');
+  });
+document.querySelector('#demo-reset')
+  .addEventListener('click', () => {
+    simulated.clear();
+    selectExample(exampleButtons[0],
+      'Пример сброшен. Показаны исходные '
+        + 'вымышленные данные трёх телят.');
+  });
+updateHistory(demoWeights(selectedExample));

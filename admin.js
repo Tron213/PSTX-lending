@@ -14,6 +14,31 @@ const el = (tag, text, cls) => {
   if (cls) n.className = cls;
   return n;
 };
+const trialLabels = {
+  goal: 'Цель проверки',
+  conditions: 'Условия и методика',
+  reading: 'Показание / результат',
+  reference: 'Контроль и расхождение',
+  conclusion: 'Вывод и ограничения',
+  next: 'Следующий шаг',
+};
+const kindLabel = (kind) => ({
+  news: 'Новость',
+  trial: 'Результат испытания',
+  'trial-plan': 'План испытания',
+}[kind] || 'Новость');
+function appendTrial(node, post) {
+  if (!post.trial || post.kind === 'news')
+    return;
+  const list = el('dl', null, 'trial-summary');
+  for (const [key, label] of
+    Object.entries(trialLabels)) {
+    if (!post.trial[key]) continue;
+    list.append(el('dt', label),
+      el('dd', post.trial[key]));
+  }
+  node.append(list);
+}
 async function api(url, options) {
   const r = await fetch(url, options);
   const data = await r.json();
@@ -70,7 +95,9 @@ function render() {
       ),
       time = el(
         'time',
-        'Опубликовано: ' + new Date(
+        (post.status === 'draft'
+          ? 'Черновик от ' : 'Опубликовано: ')
+          + new Date(
           post.date,
         ).toLocaleDateString('ru-RU', {
           day: 'numeric',
@@ -81,10 +108,16 @@ function render() {
       );
     time.dateTime = post.date;
     n.append(
+      el('span', kindLabel(post.kind)
+        + (post.status === 'draft'
+          ? ' · Только администратору'
+          : ' · Опубликовано'),
+        'post-status-badge'),
       time,
-      el('h2', post.title),
+      el('h2', post.title || 'Без заголовка'),
       el('p', post.body, 'post-body'),
     );
+    appendTrial(n, post);
     const gallery = el(
       'div',
       null,
@@ -161,7 +194,8 @@ function render() {
 }
 async function load() {
   try {
-    const d = await api('/api.php?action=news');
+    const d = await api(
+      '/api.php?action=news&scope=admin');
     posts = d.posts;
     canEdit = d.canEdit;
     if (!canEdit) {
@@ -236,16 +270,37 @@ function openEditor(post) {
     post?.title || '';
   form.elements.body.value =
     post?.body || '';
+  form.elements.kind.value =
+    post?.kind || 'news';
+  for (const key of Object.keys(trialLabels)) {
+    form.elements['trial_' + key].value =
+      post?.trial?.[key] || '';
+  }
+  updateTrialFields();
+  $('#post-status').textContent =
+    post?.status === 'published'
+      || (post && !post.status)
+      ? 'Опубликовано. Сохранение черновиком '
+        + 'снимет запись с публичного сайта.'
+      : 'Черновик виден только администратору.';
   $('#editor-title').textContent = post
     ? 'Редактировать новость'
     : 'Новая публикация';
-  $('#save').textContent = post
-    ? 'Сохранить изменения'
-    : 'Опубликовать ↗';
+  $('#save').textContent =
+    post?.status === 'published'
+      || (post && !post.status)
+      ? 'Сохранить публикацию'
+      : 'Опубликовать ↗';
   $('#form-message').textContent = '';
   attachments();
   dialog.showModal();
 }
+function updateTrialFields() {
+  $('#trial-fields').hidden =
+    form.elements.kind.value === 'news';
+}
+$('#post-kind').onchange = updateTrialFields;
+form.noValidate = true;
 $('#new-post').onclick = () =>
   openEditor();
 const close = () => {
@@ -304,13 +359,15 @@ $('#files').onchange = () => {
   $('#form-message').textContent = '';
   attachments();
 };
-form.onsubmit = async (e) => {
-  e.preventDefault();
+async function savePost(status) {
   if (busy) return;
+  if (status === 'published') {
+    if (!form.reportValidity()) return;
+  }
   busy = true;
   form
     .querySelectorAll(
-      'button,input,textarea',
+      'button,input,textarea,select',
     )
     .forEach((n) => (n.disabled = true));
   try {
@@ -335,7 +392,9 @@ form.onsubmit = async (e) => {
       pending.shift();
     }
     $('#form-message').textContent =
-      'Сохраняем публикацию…';
+      status === 'draft'
+        ? 'Сохраняем черновик…'
+        : 'Сохраняем публикацию…';
     await api('/api.php?action=news', {
       method: 'POST',
       headers: {
@@ -346,6 +405,14 @@ form.onsubmit = async (e) => {
         id: editing,
         title: form.elements.title.value,
         body: form.elements.body.value,
+        status,
+        kind: form.elements.kind.value,
+        trial: Object.fromEntries(
+          Object.keys(trialLabels).map(
+            (key) => [key, form.elements[
+              'trial_' + key].value],
+          ),
+        ),
         media,
       }),
     });
@@ -361,13 +428,19 @@ form.onsubmit = async (e) => {
     busy = false;
     form
       .querySelectorAll(
-        'button,input,textarea',
+        'button,input,textarea,select',
       )
       .forEach(
         (n) => (n.disabled = false),
       );
   }
+}
+form.onsubmit = (e) => {
+  e.preventDefault();
+  savePost('published');
 };
+$('#save-draft').onclick = () =>
+  savePost('draft');
 load();
 const settings = document.querySelector(
     '#settings',

@@ -12,6 +12,54 @@ const el = (tag, text, cls) => {
   if (cls) n.className = cls;
   return n;
 };
+const trialLabels = {
+  goal: 'Цель проверки',
+  conditions: 'Условия и методика',
+  reading: 'Показание / результат',
+  reference: 'Контроль и расхождение',
+  conclusion: 'Вывод и ограничения',
+  next: 'Следующий шаг',
+};
+const kindLabel = (kind) => ({
+  news: 'Новость',
+  trial: 'Результат испытания',
+  'trial-plan': 'План испытания',
+}[kind] || 'Новость');
+function appendTrial(node, post) {
+  if (!post.trial || post.kind === 'news')
+    return;
+  const list = el('dl', null, 'trial-summary');
+  for (const [key, label] of
+    Object.entries(trialLabels)) {
+    if (!post.trial[key]) continue;
+    list.append(el('dt', label),
+      el('dd', post.trial[key]));
+  }
+  node.append(list);
+}
+function renderFilters() {
+  const filter = new URLSearchParams(
+    location.search).get('kind');
+  const nav = el('nav', null,
+    'news-filters');
+  nav.setAttribute('aria-label',
+    'Тип публикаций');
+  for (const [label, href, active] of [
+    ['Все записи', '/news.html', !filter],
+    ['Испытания', '/news.html?kind=trial',
+      filter === 'trial'],
+    ['Планы проверок',
+      '/news.html?kind=trial-plan',
+      filter === 'trial-plan'],
+  ]) {
+    const link = el('a', label, 'secondary');
+    link.href = href;
+    if (active) link.setAttribute(
+      'aria-current', 'page');
+    nav.append(link);
+  }
+  $('#feed').before(nav);
+}
 async function api(url, options) {
   const r = await fetch(url, options);
   const data = await r.json();
@@ -77,12 +125,16 @@ function render() {
           timeZone: 'Asia/Yekaterinburg',
         }),
       );
+    n.id = 'post-' + post.id;
     time.dateTime = post.date;
     n.append(
+      el('span', kindLabel(post.kind),
+        'post-status-badge'),
       time,
       el('h2', post.title),
       el('p', post.body, 'post-body'),
     );
+    appendTrial(n, post);
     const gallery = el(
       'div',
       null,
@@ -117,10 +169,20 @@ function render() {
 async function load() {
   try {
     const d = await api('/api.php?action=news');
-    posts = d.posts;
+    const kind = new URLSearchParams(
+      location.search).get('kind');
+    posts = d.posts.filter((post) =>
+      kind === 'trial'
+        ? ['trial', 'trial-plan'].includes(
+          post.kind)
+        : kind === 'trial-plan'
+          ? post.kind === 'trial-plan'
+          : true);
     canEdit = false;
     $('#message').textContent = '';
     render();
+    const id = location.hash.slice(1);
+    document.getElementById(id)?.scrollIntoView();
   } catch (e) {
     $('#message').replaceChildren(
       document.createTextNode(
@@ -145,4 +207,5 @@ $('.menu-toggle').onclick = () => {
     String(open),
   );
 };
+renderFilters();
 load();

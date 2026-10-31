@@ -1,0 +1,121 @@
+.hero-demo-context {
+  max-width: 440px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.6;
+}
+.app-demo {
+  min-width: 0;
+}
+.app-demo .demo-roster {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 8px;
+}
+.demo-roster button {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  text-align: left;
+  gap: 5px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+.demo-roster strong {
+  font-size: 14px;
+}
+.demo-roster span {
+  line-height: 1.4;
+}
+.app-demo h4 {
+  margin: 0 0 22px;
+  font-weight: 600;
+  font-size: 16px;
+}
+.demo-connection {
+  font-size: 11px;
+  line-height: 1.5;
+  color: var(--muted);
+  margin: 16px 0 0;
+}
+.demo-history {
+  border-top: 1px solid var(--line);
+  margin: 18px 0;
+  padding-top: 16px;
+}
+.demo-history summary {
+  font-size: 12px;
+  line-height: 1.5;
+  cursor: pointer;
+}
+.demo-history table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 12px;
+  margin-top: 12px;
+}
+.demo-history th,
+.demo-history td {
+  text-align: left;
+  padding: 8px;
+  border-bottom: 1px solid var(--line);
+}
+.demo-history th:last-child,
+.demo-history td:last-child {
+  text-align: right;
+}
+.demo-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 22px;
+}
+.demo-actions button {
+  cursor: pointer;
+  font-size: 12px;
+  padding: 11px 13px;
+  white-space: normal;
+  line-height: 1.5;
+}
+.demo-actions .secondary {
+  background: white;
+  border: 1px solid var(--line);
+  color: var(--ink);
+  border-radius: 4px;
+}
+.demo-actions button:disabled {
+  cursor: default;
+  opacity: .6;
+}
+#demo-announcement {
+  font-size: 12px;
+  line-height: 1.5;
+  margin: 16px 0 8px;
+}
+.demo-disclaimer {
+  font-size: 11px;
+  line-height: 1.6;
+  margin-bottom: 0;
+  color: var(--muted);
+}
+.analytics-copy .demo-note {
+  border: 1px solid var(--line);
+  border-radius: 6px;
+  padding: 16px;
+  background: #eef2e3;
+  color: var(--ink);
+}
+@media (max-width: 440px) {
+  .app-demo .demo-roster {
+    grid-template-columns: 1fr;
+  }
+  .demo-roster button {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: 10px;
+  }
+  .demo-actions {
+    flex-direction: column;
+  }
+}

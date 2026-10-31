@@ -2,12 +2,12 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "type": "node",
+      "type": "pwa-chrome",
       "request": "launch",
-      "name": "ПАСТУХ: запуск сервера",
-      "program":
-        "${workspaceFolder}/server/index.js",
-      "console": "integratedTerminal"
+      "name": "ПАСТУХ: PHP-сайт",
+      "url": "http://127.0.0.1:8000",
+      "webRoot": "${workspaceFolder}",
+      "preLaunchTask": "ПАСТУХ: PHP"
     }
   ]
 }

@@ -329,3 +329,74 @@ button:disabled {
 #settings {
   max-width: 600px;
 }
+
+[hidden] {
+  display: none !important;
+}
+.workspace-nav,
+.news-filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin: 20px 0 36px;
+}
+.workspace-nav a,
+.news-filters a {
+  padding: 10px 16px;
+  border: 1px solid var(--line);
+  border-radius: 4px;
+  background: white;
+}
+.news-filters a[aria-current="page"] {
+  color: white;
+  background: var(--ink);
+}
+.post-status-badge {
+  display: inline-block;
+  font-size: 12px;
+  padding: 5px 10px;
+  background: #e9eddf;
+  border-radius: 20px;
+  margin: 10px 0;
+}
+.trial-summary {
+  margin-top: 28px;
+  padding-top: 20px;
+  border-top: 1px solid var(--line);
+}
+.trial-summary dt {
+  font-weight: 600;
+  margin-top: 20px;
+}
+.trial-summary dd {
+  margin: 8px 0 0;
+  line-height: 1.6;
+  white-space: pre-wrap;
+  overflow-wrap: anywhere;
+}
+#post-form select {
+  display: block;
+  width: 100%;
+  font: inherit;
+  padding: 12px;
+  margin: 8px 0 20px;
+  border: 1px solid #b6c694;
+  border-radius: 4px;
+  background: white;
+}
+#trial-fields {
+  padding: 16px;
+  border: 1px solid var(--line);
+  margin: 18px 0;
+}
+#trial-fields legend {
+  padding: 0 8px;
+}
+#save-draft {
+  margin-bottom: 18px;
+}
+#project-editor,
+#news-admin,
+#inbox {
+  scroll-margin-top: 130px;
+}

@@ -49,6 +49,10 @@ function media_action($method) {
   }
   $id = $_GET['id'] ?? '';
   if (!valid_id($id)) fail('Не найдено', 404);
+  if (!admin() && !news_media_public($id)
+      && !project_media_public($id)) {
+    fail('Не найдено', 404);
+  }
   $meta = read('media/' . $id);
   if (!$meta) fail('Не найдено', 404);
   $file = STORE . 'blobs/' . $id . '.php';

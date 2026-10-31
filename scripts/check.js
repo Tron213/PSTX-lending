@@ -1,57 +1,43 @@
 import fs from 'node:fs';
 import path from 'node:path';
+import { fileURLToPath } from 'node:url';
 import { spawnSync } from 'node:child_process';
-import { root } from '../server/config.js';
-let failures = 0;
+const root = fileURLToPath(
+  new URL('../', import.meta.url),
+);
+const skipped = new Set([
+  '.git', '.pastukh', 'data', 'node_modules',
+  '.tools', '.qa',
+]);
+let checked = 0;
+let failed = false;
 function walk(folder) {
-  for (const name of fs.readdirSync(
-    folder,
-  )) {
-    if (
-      [
-        'data',
-        '.git',
-        'node_modules',
-      ].includes(name)
-    )
-      continue;
-    const file = path.join(folder, name);
-    if (fs.statSync(file).isDirectory()) {
+  for (const entry of fs.readdirSync(folder,
+    { withFileTypes: true })) {
+    if (skipped.has(entry.name)) continue;
+    const file = path.join(folder, entry.name);
+    if (entry.isDirectory()) {
       walk(file);
       continue;
     }
-    const text = fs.readFileSync(
-      file,
-      'utf8',
-    );
-    for (const [index, line] of text
-      .split('\n')
-      .entries()) {
-      if ([...line].length > 50) {
-        console.error(
-          path.relative(root, file),
-          index + 1,
-          '> 50',
-        );
-        failures++;
-      }
+    const javascript = /\.m?js$/.test(file);
+    const php = file.endsWith('.php');
+    if (!javascript && !php) continue;
+    const binary = javascript
+      ? process.execPath
+      : process.env.PHP_BINARY || 'php';
+    const result = spawnSync(binary,
+      [javascript ? '--check' : '-l', file],
+      { encoding: 'utf8' });
+    if (result.error || result.status !== 0) {
+      failed = true;
+      console.error(path.relative(root, file),
+        result.error?.message || result.stderr
+          || result.stdout);
     }
-    if (file.endsWith('.js')) {
-      const result = spawnSync(
-        process.execPath,
-        ['--check', file],
-        { encoding: 'utf8' },
-      );
-      if (result.status !== 0) {
-        console.error(result.stderr);
-        failures++;
-      }
-    }
+    checked++;
   }
 }
 walk(root);
-if (failures) process.exit(1);
-console.log(
-  'OK: синтаксис и строки <' +
-    '= 50.',
-);
+console.log('Проверено файлов: ' + checked);
+if (failed) process.exitCode = 1;

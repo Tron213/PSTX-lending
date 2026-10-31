@@ -7,6 +7,7 @@
 </IfModule>
 <IfModule mod_alias.c>
   RedirectMatch 404 /\.(git|pastukh)(/|$)
+  RedirectMatch 404 ^/(server|scripts|views|tests|public|\.vscode)(/|$)
 </IfModule>
 <IfModule mod_php.c>
   php_value post_max_size 64M

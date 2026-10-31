@@ -3,6 +3,7 @@ if (!defined('PASTUKH')) {
   http_response_code(404);
   exit;
 }
+require __DIR__ . '/questions.php';
 ?>
 <!doctype html>
 <html lang="ru">
@@ -23,12 +24,16 @@ if (!defined('PASTUKH')) {
     />
     <link
       rel="stylesheet"
-      href="/news.css?v=20261030-date"
+      href="/news.css?v=20261031"
     />
     <script
-      src="/admin.js?v=20261030-date"
+      src="/admin.js?v=20261031"
       defer
     ></script>
+    <link rel="stylesheet"
+      href="/admin-project.css?v=20261031" />
+    <script src="/admin-project.js?v=20261031"
+      defer></script>
   </head>
   <body class="admin-page">
     <header class="header">
@@ -68,23 +73,34 @@ if (!defined('PASTUKH')) {
       </nav>
     </header>
     <main class="news-main">
-      <section class="news-intro">
+      <nav class="workspace-nav"
+        aria-label="Разделы кабинета">
+        <a href="#project-editor">Сайт</a>
+        <a href="#news-admin">Дневник</a>
+        <a href="#inbox">Обращения</a>
+      </nav>
+      <?php
+      require __DIR__ . '/project-editor.php';
+      require __DIR__ . '/concept-notes.php';
+      ?>
+      <?php require __DIR__ . '/inbox.php'; ?>
+      <section class="news-intro" id="news-admin">
         <p class="eyebrow">
           <span class="dot"></span>
           ПАСТУХ / АДМИНИСТРИРОВАНИЕ
         </p>
         <h1>
-          Управление
+          Новости
           <br />
-          новостями.
+          и испытания.
         </h1>
         <div class="news-intro-bottom">
           <p class="intro">
             Публикуйте обновления,
             добавляйте фото и видео.
             <br />
-            Все изменения сразу появляются
-            во вкладке «Новости».
+            Черновики видны только вам.
+            Публикуйте после проверки данных.
           </p>
           <button
             id="new-post"
@@ -152,7 +168,7 @@ if (!defined('PASTUKH')) {
       id="editor"
       aria-labelledby="editor-title"
     >
-      <form id="post-form">
+      <form id="post-form" novalidate>
         <div class="editor-top">
           <p class="eyebrow">
             ПАСТУХ / РЕДАКТОР
@@ -188,6 +204,9 @@ if (!defined('PASTUKH')) {
            placeholder="Расскажите об обновлении…"
           ></textarea>
         </label>
+        <?php
+        require __DIR__ . '/trial-fields.php';
+        ?>
         <label>
           Фотографии и видео
           <input

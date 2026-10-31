@@ -1,0 +1,45 @@
+#latest {
+  border-top: 1px solid var(--line);
+}
+#latest-card:not([hidden]) {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 24px;
+  margin: 24px 0;
+}
+#latest-card > div {
+  flex: 1 1 260px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+}
+#latest-card img {
+  width: min(100%, 320px);
+  aspect-ratio: 16/10;
+  object-fit: cover;
+  border-radius: 8px;
+}
+#latest-card h3 {
+  font-size: clamp(24px, 4vw, 38px);
+  margin: 10px 0;
+}
+#contact {
+  background: #e9eddf;
+}
+#ask-team {
+  max-width: 560px;
+}
+#ask-team label {
+  display: block;
+  margin: 18px 0;
+}
+#ask-team input,
+#ask-team textarea {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  margin-top: 6px;
+  font: inherit;
+  border: 1px solid #839b79;
+  border-radius: 4px;
+}
