@@ -7,6 +7,7 @@ if (!defined('PASTUKH')) {
 <!doctype html>
 <html lang="ru">
   <head>
+    <meta name="theme-color" content="#f5f4ef" />
     <meta charset="utf-8" />
     <meta
       name="viewport"
@@ -19,38 +20,34 @@ if (!defined('PASTUKH')) {
       rel="icon"
       href="/assets/mark.svg"
     />
-    <link
-      rel="stylesheet"
-      href="/styles.css?v=redesign1"
-    />
-    <link
-      rel="stylesheet"
-      href="/news.css"
-    />
     <script
       src="/admin-login.js"
       defer
     ></script>
-    <script src="/site.js?v=redesign1"></script>
-    <link rel="stylesheet" href="/admin-theme.css?v=redesign1" />
-  </head>
+    <script src="/site.js?v=unified-20261101"></script>
+    <link rel="stylesheet" href="/admin-theme.css?v=unified-20261101" />
+    <link rel="stylesheet" href="/design.css?v=unified-20261101" />
+</head>
   <body>
+    <a class="skip" href="#main">Перейти к содержанию</a>
     <header class="header">
-      <a
-        class="brand"
-        href="/"
-      >
-        <img
-          src="/assets/mark.svg"
-          width="34"
-          height="34"
-          alt=""
-        />
-        ПАСТУХ
-      </a>
-      <a href="/news.html">К новостям ↗</a>
-    </header>
-    <main class="login-card">
+  <a class="brand" href="/" aria-label="ПАСТУХ — главная">
+    <img src="/assets/mark.svg" width="34" height="34" alt="" />ПАСТУХ
+  </a>
+  <nav id="nav" aria-label="Разделы сайта">
+    <a href="/">Главная</a>
+    <a href="/about.html">О проекте</a>
+    <a href="/demo.html">Пример приложения</a>
+    <a href="/roadmap.html">Путь проекта</a>
+    <a href="/news.html">Новости</a>
+    <a href="/contact.html">Контакты</a>
+  </nav>
+  <div class="header-controls">
+    <button class="theme-toggle" type="button" aria-label="Переключить тему">Тема</button>
+    <button class="menu-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">☰</button>
+  </div>
+</header>
+    <main id="main" class="login-card">
       <p class="eyebrow">
         ПАСТУХ / ВХОД АДМИНИСТРАТОРА
       </p>
@@ -114,5 +111,10 @@ if (!defined('PASTUKH')) {
         админ-панели.
       </p>
     </main>
-  </body>
+  <footer class="site-footer">
+  <a class="brand" href="/">ПАСТУХ</a>
+  <p>Проект технологий для животноводства.</p>
+  <a href="/admin/index.php">Для команды ↗</a>
+</footer>
+</body>
 </html>

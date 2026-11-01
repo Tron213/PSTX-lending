@@ -61,31 +61,11 @@ function render() {
       )
     : '';
   if (!posts.length) {
-    const n = el('div', null, 'empty');
-    n.append(
-      el(
-        'p',
-        'ДНЕВНИК ПРОЕКТА',
-        'eyebrow',
-      ),
-      el(
-        'h2',
-        'Здесь начинается новая и' +
-          'стория.',
-      ),
-      el(
-        'p',
-        canEdit
-          ? 'Добавьте первую новость ' +
-              '— расскажите об обновлен' +
-              'ии, покажите фото или ви' +
-              'део.'
-          : 'Здесь появятся новости и' +
-              ' материалы о развитии пр' +
-              'оекта.',
-      ),
-    );
-    feed.append(n);
+    const empty = el('div', null, 'empty');
+    empty.append(el('h2', 'Публикаций пока нет'),
+      el('p', canEdit ? 'Создайте первую новость кнопкой «Добавить новость».'
+        : 'Новые публикации команды появятся здесь.'));
+    feed.append(empty);
     return;
   }
   for (const post of posts) {
@@ -108,13 +88,16 @@ function render() {
         }),
       );
     time.dateTime = post.date;
-    n.append(
+    const metadata = el('div', null, 'post-meta');
+    metadata.append(
       el('span', kindLabel(post.kind)
         + (post.status === 'draft'
           ? ' · Только администратору'
           : ' · Опубликовано'),
         'post-status-badge'),
       time,
+    );
+    n.append(metadata,
       el('h2', post.title || 'Без заголовка'),
       el('p', post.body, 'post-body'),
     );

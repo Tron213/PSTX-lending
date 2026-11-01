@@ -4,12 +4,10 @@ if (!defined('PASTUKH') || !admin()) exit;
 <section id="project-editor"
   class="project-editor"
   aria-labelledby="project-editor-title">
-  <p class="eyebrow">
-    ПАСТУХ / СОДЕРЖАНИЕ САЙТА
-  </p>
   <h2 id="project-editor-title">
-    Материалы сайта
+    Разделы сайта
   </h2>
+  <details class="editor-guidance"><summary>Как публиковать материалы</summary>
   <p class="project-editor-intro">
     Задумки и этапы развития редактируются
     на отдельной вкладке «Путь проекта».
@@ -33,6 +31,7 @@ if (!defined('PASTUKH') || !admin()) exit;
     администратору. Удаление из раздела
     убирает ссылку, сохраняя сам файл.
   </p>
+  </details>
   <div id="project-load-state"
     role="status" aria-live="polite">
     Загрузка разделов…

@@ -5,6 +5,11 @@
     Require all denied
   </FilesMatch>
 </IfModule>
+<IfModule mod_headers.c>
+  <FilesMatch "\.html$">
+    Header set Cache-Control "no-cache"
+  </FilesMatch>
+</IfModule>
 <IfModule mod_alias.c>
   RedirectMatch 404 /\.(git|pastukh)(/|$)
   RedirectMatch 404 ^/(server|scripts|views|tests|public|\.vscode)(/|$)

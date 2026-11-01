@@ -8,87 +8,77 @@ require __DIR__ . '/questions.php';
 <!doctype html>
 <html lang="ru">
   <head>
+    <meta name="theme-color" content="#f5f4ef" />
     <meta charset="utf-8" />
     <meta
       name="viewport"
       content="width=device-width,initial-scale=1"
     />
     <title>Админ-панель — ПАСТУХ</title>
+    <link rel="stylesheet" href="/design.css?v=unified-20261101" />
     <link
       rel="icon"
       href="/assets/mark.svg"
     />
-    <link
-      rel="stylesheet"
-      href="/styles.css?v=redesign1"
-    />
-    <link
-      rel="stylesheet"
-      href="/news.css?v=20261031"
-    />
     <?php if ($adminView === 'news'): ?>
-    <script src="/admin.js?v=path1" defer></script>
+    <script src="/admin.js?v=unified-20261101" defer></script>
     <?php endif; ?>
-    <script src="/admin-shell.js?v=path1" defer></script>
-    <link rel="stylesheet" href="/roadmap.css?v=path1" />
+    <script src="/admin-shell.js?v=unified-20261101" defer></script>
     <?php if ($adminView === 'roadmap'): ?>
-    <script src="/admin-roadmap.js?v=path1" defer></script>
+    <script src="/admin-roadmap.js?v=unified-20261101" defer></script>
     <?php endif; ?>
     <link rel="stylesheet"
-      href="/admin-project.css?v=20261031" />
-    <script src="/admin-project.js?v=20261031"
+      href="/admin-project.css?v=unified-20261101" />
+    <script src="/admin-project.js?v=unified-20261101"
       defer></script>
-    <script src="/site.js?v=redesign1"></script>
-    <link rel="stylesheet" href="/admin-theme.css?v=redesign1" />
-  </head>
+    <script src="/site.js?v=unified-20261101"></script>
+    <link rel="stylesheet" href="/admin-theme.css?v=unified-20261101" />
+</head>
   <body class="admin-page">
+    <a class="skip" href="#main">Перейти к содержанию</a>
     <header class="header">
-      <a
-        class="brand"
-        href="/"
-      >
-        <img
-          src="/assets/mark.svg"
-          width="34"
-          height="34"
-          alt=""
-        />
-        ПАСТУХ
-      </a>
-      <nav
-        class="admin-nav"
-        aria-label="Навигация администратора"
-      >
-        <a href="/news.html">
-          Открыть новости ↗
-        </a>
-        <button
-          type="button"
-          class="secondary"
-          id="settings-button"
-        >
-          Настройки входа
-        </button>
-        <button
-          type="button"
-          class="secondary"
-          id="logout"
-        >
-          Выйти
-        </button>
-      </nav>
-    </header>
-    <main class="news-main">
-      <nav class="workspace-nav"
-        aria-label="Разделы кабинета">
-        <a href="/admin/index.php" <?= $adminView === 'news'
-          ? 'aria-current="page"' : '' ?>>Новости</a>
-        <a href="/admin/roadmap.php" <?= $adminView === 'roadmap'
-          ? 'aria-current="page"' : '' ?>>Путь проекта</a>
-        <a href="/admin/content.php" <?= $adminView === 'content'
-          ? 'aria-current="page"' : '' ?>>Материалы сайта</a>
-        <a href="/admin/index.php#inbox">Обращения</a>
-      </nav>
+  <a class="brand" href="/" aria-label="ПАСТУХ — главная">
+    <img src="/assets/mark.svg" width="34" height="34" alt="" />ПАСТУХ
+  </a>
+  <nav id="nav" aria-label="Разделы сайта">
+    <a href="/">Главная</a>
+    <a href="/about.html">О проекте</a>
+    <a href="/demo.html">Пример приложения</a>
+    <a href="/roadmap.html">Путь проекта</a>
+    <a href="/news.html">Новости</a>
+    <a href="/contact.html">Контакты</a>
+  </nav>
+  <div class="header-controls">
+    <button class="theme-toggle" type="button" aria-label="Переключить тему">Тема</button>
+    <button class="menu-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">☰</button>
+  </div>
+</header>
+    <main id="main" class="page-main admin-main">
+      <div class="workspace-bar">
+        <nav class="workspace-nav" aria-label="Разделы админки">
+          <a href="/admin/index.php" <?= $adminView === 'news' ? 'aria-current="page"' : '' ?>>Новости</a>
+          <a href="/admin/roadmap.php" <?= $adminView === 'roadmap' ? 'aria-current="page"' : '' ?>>Путь проекта</a>
+          <a href="/admin/content.php" <?= $adminView === 'content' ? 'aria-current="page"' : '' ?>>Материалы сайта</a>
+          <a href="/admin/index.php#inbox">Обращения</a>
+        </nav>
+        <div class="workspace-actions">
+          <button type="button" class="secondary" id="settings-button">Настройки входа</button>
+          <button type="button" class="secondary" id="logout">Выйти</button>
+        </div>
+      </div>
+      <section class="page-heading admin-heading">
+        <p class="eyebrow">ПАСТУХ / КОМАНДА</p>
+        <?php if ($adminView === 'roadmap'): ?>
+          <h1>Путь<br /><span class="accent-text">проекта.</span></h1>
+          <p class="lead">Задумки, работа и результаты — от идеи к готовому продукту.</p>
+        <?php elseif ($adminView === 'content'): ?>
+          <h1>Материалы<br /><span class="accent-text">сайта.</span></h1>
+          <p class="lead">Описания разделов, фотографии, видео и ссылки для посетителей.</p>
+        <?php else: ?>
+          <h1>Новости<br /><span class="accent-text">проекта.</span></h1>
+          <p class="lead">Создавайте публикации, сохраняйте черновики и делитесь обновлениями команды.</p>
+        <?php endif; ?>
+      </section>
       <p id="shell-message" role="status"></p>
       <?php if ($adminView === 'roadmap'):
         require __DIR__ . '/roadmap-panel.php';
@@ -96,32 +86,9 @@ require __DIR__ . '/questions.php';
         require __DIR__ . '/project-editor.php';
         require __DIR__ . '/concept-notes.php';
       else: ?>
-      <?php require __DIR__ . '/inbox.php'; ?>
-      <section class="news-intro" id="news-admin">
-        <p class="eyebrow">
-          <span class="dot"></span>
-          ПАСТУХ / АДМИНИСТРИРОВАНИЕ
-        </p>
-        <h1>
-          Новости проекта.
-        </h1>
-        <div class="news-intro-bottom">
-          <p class="intro">
-            Публикуйте обновления,
-            добавляйте фото и видео.
-            <br />
-            Черновики видны только вам.
-            Публикуйте после проверки данных.
-          </p>
-          <button
-            id="new-post"
-            class="button"
-            hidden
-          >
-            Добавить новость
-            <span>+</span>
-          </button>
-        </div>
+      <section class="admin-news-tools" id="news-admin">
+        <button id="new-post" class="button" type="button" hidden>Добавить новость +</button>
+        <a class="text-link" href="/news.html">Открыть публичные новости ↗</a>
       </section>
       <details class="admin-help">
         <summary>
@@ -174,6 +141,7 @@ require __DIR__ . '/questions.php';
         class="news-feed"
         aria-label="Публикации"
       ></section>
+      <?php require __DIR__ . '/inbox.php'; ?>
       <?php endif; ?>
     </main>
     <?php if ($adminView === 'news'): ?>
@@ -353,24 +321,10 @@ require __DIR__ . '/questions.php';
         </button>
       </form>
     </dialog>
-    <footer>
-      <a
-        class="brand"
-        href="/"
-      >
-        <img
-          src="/assets/mark.svg"
-          width="28"
-          height="28"
-          alt=""
-        />
-        ПАСТУХ
-      </a>
-      <p>
-        Технологии для тех, кто растёт.
-      </p>
-      <a href="/">На главную ↗</a>
-      <span>© 2026</span>
-    </footer>
+    <footer class="site-footer">
+  <a class="brand" href="/">ПАСТУХ</a>
+  <p>Проект технологий для животноводства.</p>
+  <a href="/admin/index.php">Для команды ↗</a>
+</footer>
   </body>
 </html>

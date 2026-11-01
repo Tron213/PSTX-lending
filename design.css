@@ -16,6 +16,8 @@
   --lime: #cee6a2;
   --serif: Arial, Helvetica, sans-serif;
   --shadow: 0 20px 70px #18392b0a;
+  --radius-card: 14px;
+  --radius-control: 8px;
 }
 :root[data-theme="dark"] {
   color-scheme: dark;
@@ -255,6 +257,8 @@ svg text { font-family: Arial, sans-serif; }
 label { display: block; font-size: 14px; font-weight: 600; margin: 20px 0; }
 input, textarea, select {
   display: block;
+  font-size: 16px;
+  line-height: 1.65;
   width: 100%;
   border: 1px solid var(--line);
   border-radius: 7px;
@@ -276,7 +280,7 @@ form [role="status"] { font-size: 14px; margin: 20px 0 0; }
 .news-card time { font-size: 13px; color: var(--muted); }
 .post-status-badge, .project-status-badge, .path-badge { display: inline-block; font-size: 12px; padding: 5px 11px; background: var(--accent-soft); color: var(--ink); border-radius: 20px; margin-right: 12px; }
 .post-actions { display: flex; flex-wrap: wrap; gap: 12px; margin-top: 22px; }
-.empty { padding: 35px; border: 1px dashed var(--line); border-radius: 12px; color: var(--muted); }
+.empty { padding: 32px; border: 1px solid var(--line); border-radius: var(--radius-card); background: var(--surface); color: var(--muted); }
 .empty h2 { color: var(--ink); font-size: 27px; }
 .path-filters, .workspace-nav { display: flex; flex-wrap: wrap; gap: 12px; margin: 25px 0 35px; }
 .path-filters a, .workspace-nav a { padding: 10px 17px; border-radius: 7px; background: var(--surface); border: 1px solid var(--line); color: var(--ink); text-decoration: none; font-size: 14px; }
@@ -393,9 +397,6 @@ dialog::backdrop { background: #07140fc4; }
   .reading strong { font-size: 35px; }
   .status { max-width: 130px; }
   .project-gallery, .post-media { grid-template-columns: 1fr; }
-  .header nav.admin-nav { gap: 4px; }
-  .admin-page .header { flex-wrap: wrap; }
-  .admin-page .header nav { order: 3; width: 100%; }
   .scene-label { left: 18px; right: 18px; top: 17px; font-size: 8px; }
   .scene-hint { font-size: 10px; }
   .component-trigger { width: 34px; height: 34px; }
@@ -407,4 +408,43 @@ dialog::backdrop { background: #07140fc4; }
 }
 @media (prefers-reduced-motion: reduce) {
   *, *::before, *::after { animation-duration: .01ms !important; transition-duration: .01ms !important; scroll-behavior: auto !important; }
+}
+/* Shared card and publication components. */
+.route-card, .form-card, .dashboard, .news-card,
+.path-stage, .path-panel, .project-editor,
+.admin-help, .empty, .login-card {
+  border-radius: var(--radius-card);
+  border-color: var(--line);
+  background: var(--surface);
+  color: var(--ink);
+}
+.post-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 12px;
+  color: var(--muted);
+  font-size: 13px;
+  line-height: 1.5;
+}
+.post-meta .post-status-badge { margin: 0; }
+.post-meta time { color: var(--muted); background: transparent; }
+.news-card h2, .path-stage h2 {
+  font-size: clamp(24px, 2.5vw, 32px);
+  font-weight: 600;
+  line-height: 1.2;
+}
+.news-card .post-body { margin-bottom: 20px; }
+.post-media:empty { display: none; }
+input, textarea, select, .button, .secondary,
+.theme-toggle, .menu-toggle { border-radius: var(--radius-control); }
+.animal-tabs button, .path-filters a, .workspace-nav a { border-radius: var(--radius-control); }
+.empty p { color: var(--muted); margin-bottom: 0; }
+select {
+  appearance: none;
+  padding-right: 38px;
+  background-image: linear-gradient(45deg, transparent 50%, var(--muted) 50%), linear-gradient(135deg, var(--muted) 50%, transparent 50%);
+  background-position: calc(100% - 20px) 50%, calc(100% - 15px) 50%;
+  background-size: 5px 5px;
+  background-repeat: no-repeat;
 }
