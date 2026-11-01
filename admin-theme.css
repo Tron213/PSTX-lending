@@ -1,0 +1,24 @@
+/* Keep the protected editors consistent with the public theme. */
+.admin-page .header .brand { margin-right: auto; }
+.admin-page .header .admin-nav { position: static; display: flex; }
+.admin-page .news-intro { margin-top: 35px; }
+.admin-page .news-intro h1 { font-size: clamp(35px, 5vw, 55px); }
+.news-intro-bottom { display: flex; gap: 25px; justify-content: space-between; align-items: center; flex-wrap: wrap; }
+.project-editor, .project-preview, .project-editor select,
+.path-panel, .path-stage, .path-panel input:not([type="checkbox"]),
+.path-panel textarea, .path-panel select,
+.workspace-nav a, .news-card, .empty, .admin-help {
+  background: var(--surface);
+  color: var(--ink);
+  border-color: var(--line);
+}
+.path-badge, .project-status-badge, .post-status-badge, .news-card time {
+  background: var(--accent-soft);
+  color: var(--ink);
+}
+.workspace-nav a[aria-current="page"] { background: var(--accent); color: var(--accent-ink); }
+.password-field button { padding: 10px; min-height: 43px; }
+#login-button { width: 100%; margin-top: 24px; }
+.project-editor > p { max-width: 820px; }
+.path-panel summary::after { content: '+'; margin-left: auto; color: var(--accent); font-size: 22px; }
+.path-panel[open] summary::after { content: '−'; }

@@ -20,7 +20,7 @@ require __DIR__ . '/questions.php';
     />
     <link
       rel="stylesheet"
-      href="/styles.css"
+      href="/styles.css?v=redesign1"
     />
     <link
       rel="stylesheet"
@@ -38,6 +38,8 @@ require __DIR__ . '/questions.php';
       href="/admin-project.css?v=20261031" />
     <script src="/admin-project.js?v=20261031"
       defer></script>
+    <script src="/site.js?v=redesign1"></script>
+    <link rel="stylesheet" href="/admin-theme.css?v=redesign1" />
   </head>
   <body class="admin-page">
     <header class="header">

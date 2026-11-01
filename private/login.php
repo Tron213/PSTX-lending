@@ -21,7 +21,7 @@ if (!defined('PASTUKH')) {
     />
     <link
       rel="stylesheet"
-      href="/styles.css"
+      href="/styles.css?v=redesign1"
     />
     <link
       rel="stylesheet"
@@ -31,6 +31,8 @@ if (!defined('PASTUKH')) {
       src="/admin-login.js"
       defer
     ></script>
+    <script src="/site.js?v=redesign1"></script>
+    <link rel="stylesheet" href="/admin-theme.css?v=redesign1" />
   </head>
   <body>
     <header class="header">

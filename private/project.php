@@ -37,6 +37,10 @@ function project_safe_url($url) {
     return true;
   }
   // Only explicitly public local paths.
+  if ($url === '/') return true;
+  if (preg_match(
+      '~^/(?:about|demo|contact)\.html(?:#[a-z][a-z0-9-]*)?$~D',
+      $url)) return true;
   if (preg_match(
       '~^/roadmap\.html(?:\?state=(?:done|development))?$~D',
       $url)) return true;

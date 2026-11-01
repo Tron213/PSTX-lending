@@ -1,0 +1,324 @@
+<!doctype html>
+<html lang="ru">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f5f4ef" />
+  <meta name="description" content="ПАСТУХ — платформа анализа состояния телят и учёта хозяйства. Ознакомительный сайт проекта." />
+  <title>Пример приложения — ПАСТУХ</title>
+  <link rel="icon" href="/assets/mark.svg" />
+  <script src="/site.js?v=redesign1"></script>
+  <link rel="stylesheet" href="/styles.css?v=redesign1" />
+  <link rel="stylesheet" href="/app-demo.css?v=redesign1" />
+  <script src="/script.js?v=redesign1" defer></script>
+</head>
+<body>
+  <a class="skip" href="#main">Перейти к содержанию</a>
+  <header class="header">
+  <a class="brand" href="/" aria-label="ПАСТУХ — главная">
+    <img src="/assets/mark.svg" width="34" height="34" alt="" />ПАСТУХ
+  </a>
+  <nav id="nav" aria-label="Разделы сайта">
+    <a href="/">Главная</a>
+    <a href="/about.html">О проекте</a>
+    <a href="/demo.html" aria-current="page">Пример приложения</a>
+    <a href="/roadmap.html">Путь проекта</a>
+    <a href="/news.html">Новости</a>
+    <a href="/contact.html">Контакты</a>
+  </nav>
+  <div class="header-controls">
+    <button class="theme-toggle" type="button" aria-label="Переключить тему">Тема</button>
+    <button class="menu-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">☰</button>
+  </div>
+</header>
+  <main id="main" class="page-main">
+  <section class="page-heading"><p class="eyebrow">ИНТЕРАКТИВНЫЙ ПРИМЕР</p><h1>Как может выглядеть<br /><span class="accent-text">приложение.</span></h1><p class="lead">Карточка животного, динамика веса и история — один из возможных сценариев будущего продукта.</p></section>
+  <section class="demo-layout section"><aside class="demo-explanation"><div class="callout"><strong>Демонстрация, а не рабочий кабинет</strong><p>Все животные и измерения вымышлены. Пример не подключён к оборудованию или данным хозяйств.</p></div><ol class="demo-instructions"><li>Выберите один из трёх профилей.</li><li>Посмотрите график и историю.</li><li>Добавьте условную точку или сбросьте пример.</li></ol><p class="quiet-note">Изменения существуют только в текущем просмотре и исчезают при обновлении страницы.</p></aside><div class="dashboard app-demo"
+          aria-label="Пример приложения">
+          <div class="dashboard-head">
+            <div>
+              <span class="mini-label">
+                ПАСТУХ / ТЕСТОВЫЙ РЕЕСТР
+              </span>
+              <h3>Три условных телёнка</h3>
+            </div>
+            <span class="demo-badge">
+              ПРИМЕР
+            </span>
+          </div>
+          <p class="demo-connection">
+            Условные данные · без подключения
+          </p>
+          <div
+            class="animal-tabs demo-roster"
+            role="group"
+            aria-label="Тестовый реестр животных"
+          >
+            <button
+              type="button"
+              class="active"
+              data-animal="stable"
+              aria-pressed="true"
+            >
+              <strong>№ 024</strong>
+              <span>Группа А · рост</span>
+              <span data-roster-weight="stable">
+                68,4 кг
+              </span>
+            </button>
+            <button
+              type="button"
+              data-animal="attention"
+              aria-pressed="false"
+            >
+              <strong>№ 017</strong>
+              <span>Группа А · изменение</span>
+              <span data-roster-weight="attention">
+                52,8 кг
+              </span>
+            </button>
+            <button
+              type="button"
+              data-animal="balanced"
+              aria-pressed="false"
+            >
+              <strong>№ 031</strong>
+              <span>Группа Б · рост</span>
+              <span data-roster-weight="balanced">
+                62,4 кг
+              </span>
+            </button>
+          </div>
+          <h4 id="demo-card-title">
+            Карточка № 024 · группа А
+          </h4>
+          <div class="reading">
+            <div>
+              <span>
+                Последнее измерение
+              </span>
+              <strong id="weight">
+                68,4
+                <small>кг</small>
+              </strong>
+            </div>
+            <span
+              class="status"
+              id="status"
+            >
+              Положительная динамика
+            </span>
+          </div>
+          <svg
+            class="chart"
+            viewBox="0 0 480 205"
+            role="img"
+            aria-labelledby="
+              chart-title chart-desc
+            "
+          >
+            <title id="chart-title">
+              Демонстрационный график веса
+            </title>
+            <desc id="chart-desc">
+              Вес растёт с 42 до 68,4
+              килограмма за 5 недель.
+            </desc>
+            <defs>
+              <linearGradient
+                id="area"
+                x1="0"
+                y1="0"
+                x2="0"
+                y2="1"
+              >
+                <stop
+                  stop-color="#d4ed84"
+                  stop-opacity=".6"
+                />
+                <stop
+                  offset="1"
+                  stop-color="#d4ed84"
+                  stop-opacity="0"
+                />
+              </linearGradient>
+            </defs>
+            <g stroke="#e4e8df">
+              <path
+                d="
+                  M40 25H455M40 75H455M40
+                  125H455M40 175H455
+                "
+              />
+            </g>
+            <g
+              fill="#7d857c"
+              font-family="Arial,sans-serif"
+              font-size="11"
+            >
+              <text
+                x="5"
+                y="29"
+              >
+                70
+              </text>
+              <text
+                x="5"
+                y="79"
+              >
+                60
+              </text>
+              <text
+                x="5"
+                y="129"
+              >
+                50
+              </text>
+              <text
+                x="5"
+                y="179"
+              >
+                40
+              </text>
+              <text
+                data-week-label
+                x="34"
+                y="201"
+              >
+                01 нед.
+              </text>
+              <text
+                data-week-label
+                x="136"
+                y="201"
+              >
+                02
+              </text>
+              <text
+                data-week-label
+                x="238"
+                y="201"
+              >
+                03
+              </text>
+              <text
+                data-week-label
+                x="340"
+                y="201"
+              >
+                04
+              </text>
+              <text
+                data-week-label
+                x="438"
+                y="201"
+              >
+                05
+              </text>
+            </g>
+            <path
+              id="chart-area"
+              d="
+                M40 165L143 131L246 96L349 62L452
+                33V175H40Z
+              "
+              fill="url(#area)"
+            />
+            <path
+              id="chart-line"
+              d="
+                M40 165L143 131L246 96L349 62L452
+                33
+              "
+              fill="none"
+              stroke="#34543c"
+              stroke-width="3"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+            <g
+              id="chart-points"
+              fill="#34543c"
+            >
+              <circle
+                cx="40"
+                cy="165"
+                r="4"
+              />
+              <circle
+                cx="143"
+                cy="131"
+                r="4"
+              />
+              <circle
+                cx="246"
+                cy="96"
+                r="4"
+              />
+              <circle
+                cx="349"
+                cy="62"
+                r="4"
+              />
+              <circle
+                cx="452"
+                cy="33"
+                r="5"
+              />
+            </g>
+          </svg>
+          <p class="chart-caption">
+            Возраст, недели · масса, кг
+          </p>
+          <details class="demo-history">
+            <summary>История условных измерений</summary>
+            <table>
+              <thead>
+                <tr>
+                  <th scope="col">Возраст</th>
+                  <th scope="col">Масса, кг</th>
+                </tr>
+              </thead>
+              <tbody id="demo-history-body">
+                <tr><td>1 неделя</td><td>42</td></tr>
+                <tr><td>2 недели</td><td>48,8</td></tr>
+                <tr><td>3 недели</td><td>55,8</td></tr>
+                <tr><td>4 недели</td><td>62,6</td></tr>
+                <tr><td>5 недель</td><td>68,4</td></tr>
+              </tbody>
+            </table>
+          </details>
+          <div
+            class="insight"
+            aria-live="polite"
+          >
+            <span>↗</span>
+            <p id="insight-text">
+              В этом примере вес
+              увеличивается при каждом
+              измерении. История позволяет
+              увидеть устойчивый рост.
+            </p>
+          </div>
+          <div class="demo-actions">
+            <button type="button"
+              class="button" id="demo-measurement">
+              Показать новое измерение
+            </button>
+            <button type="button"
+              id="demo-reset" class="secondary">
+              Сбросить пример
+            </button>
+          </div>
+          <p id="demo-announcement" role="status"
+            aria-live="polite" aria-atomic="true">
+            Выбран пример № 024.
+          </p>
+        </div></section></main>
+  <footer class="site-footer">
+  <a class="brand" href="/">ПАСТУХ</a>
+  <p>Проект технологий для животноводства.</p>
+  <a href="/admin/index.php">Для команды ↗</a>
+</footer>
+</body>
+</html>

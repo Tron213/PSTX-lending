@@ -37,21 +37,6 @@ function appendTrial(node, post) {
   }
   node.append(list);
 }
-function renderFilters() {
-  const nav = el('nav', null, 'news-filters');
-  nav.setAttribute('aria-label', 'Новости и путь проекта');
-  for (const [label, href] of [
-    ['Новости', '/news.html'],
-    ['Выполнено', '/roadmap.html?state=done'],
-    ['В разработке', '/roadmap.html?state=development'],
-  ]) {
-    const link = el('a', label, 'secondary');
-    link.href = href;
-    if (href === '/news.html') link.setAttribute('aria-current', 'page');
-    nav.append(link);
-  }
-  $('#feed').before(nav);
-}
 async function api(url, options) {
   const r = await fetch(url, options);
   const data = await r.json();
@@ -183,13 +168,4 @@ async function load() {
     $('#message').append(retry);
   }
 }
-$('.menu-toggle').onclick = () => {
-  const open =
-    $('#nav').classList.toggle('open');
-  $('.menu-toggle').setAttribute(
-    'aria-expanded',
-    String(open),
-  );
-};
-renderFilters();
 load();

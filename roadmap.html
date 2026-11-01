@@ -2,52 +2,43 @@
 <html lang="ru">
 <head>
   <meta charset="utf-8" />
-  <meta name="viewport"
-    content="width=device-width,initial-scale=1" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <meta name="theme-color" content="#f5f4ef" />
+  <meta name="description" content="ПАСТУХ — платформа анализа состояния телят и учёта хозяйства. Ознакомительный сайт проекта." />
   <title>Путь проекта — ПАСТУХ</title>
   <link rel="icon" href="/assets/mark.svg" />
-  <link rel="stylesheet" href="/styles.css" />
-  <link rel="stylesheet" href="/news.css" />
-  <link rel="stylesheet" href="/roadmap.css" />
-  <script src="/roadmap.js?v=path1" defer></script>
+  <script src="/site.js?v=redesign1"></script>
+  <link rel="stylesheet" href="/styles.css?v=redesign1" />
+  
+  <script src="/roadmap.js?v=redesign1" defer></script>
 </head>
 <body>
+  <a class="skip" href="#main">Перейти к содержанию</a>
   <header class="header">
-    <a class="brand" href="/">
-      <img src="/assets/mark.svg" width="34"
-        height="34" alt="" />ПАСТУХ
-    </a>
-    <nav aria-label="Основная навигация">
-      <a href="/">Главная</a>
-      <a href="/news.html">Новости</a>
-      <a href="/roadmap.html"
-        aria-current="page">Путь проекта</a>
-    </nav>
-  </header>
-  <main class="news-main">
-    <p class="eyebrow">ПАСТУХ / ПУТЬ ПРОЕКТА</p>
-    <h1>От идеи<br />к готовому продукту.</h1>
-    <p class="intro">Задумки, работа команды
-      и полученные результаты — по этапам.
-      Порядок и состояние этапов обновляет команда.</p>
-    <nav class="path-filters"
-      aria-label="Состояние этапов">
-      <a href="/roadmap.html" data-state="">
-        Весь путь
-      </a>
-      <a href="/roadmap.html?state=done"
-        data-state="done">Выполнено</a>
-      <a href="/roadmap.html?state=development"
-        data-state="development">В разработке</a>
-    </nav>
-    <p id="path-summary"></p>
-    <p id="path-message" role="status"
-      aria-live="polite">Загрузка пути проекта…</p>
-    <ol id="path-stages" class="path-list"></ol>
-  </main>
-  <footer>
-    <a href="/">ПАСТУХ · На главную</a>
-    <a href="/admin/roadmap.php">Админ-панель</a>
-  </footer>
+  <a class="brand" href="/" aria-label="ПАСТУХ — главная">
+    <img src="/assets/mark.svg" width="34" height="34" alt="" />ПАСТУХ
+  </a>
+  <nav id="nav" aria-label="Разделы сайта">
+    <a href="/">Главная</a>
+    <a href="/about.html">О проекте</a>
+    <a href="/demo.html">Пример приложения</a>
+    <a href="/roadmap.html" aria-current="page">Путь проекта</a>
+    <a href="/news.html">Новости</a>
+    <a href="/contact.html">Контакты</a>
+  </nav>
+  <div class="header-controls">
+    <button class="theme-toggle" type="button" aria-label="Переключить тему">Тема</button>
+    <button class="menu-toggle" type="button" aria-controls="nav" aria-expanded="false" aria-label="Открыть меню">☰</button>
+  </div>
+</header>
+  <main id="main" class="page-main">
+  <section class="page-heading"><p class="eyebrow">ПУТЬ ПРОЕКТА</p><h1>От идеи<br /><span class="accent-text">к готовому продукту.</span></h1><p class="lead">Задумки, текущая работа и полученные результаты. Этапы и их состояние обновляет команда.</p></section>
+  <nav class="path-filters" aria-label="Состояние этапов"><a href="/roadmap.html" data-state="">Весь путь</a><a href="/roadmap.html?state=done" data-state="done">Выполнено</a><a href="/roadmap.html?state=development" data-state="development">В разработке</a></nav>
+  <p id="path-summary"></p><p id="path-message" role="status" aria-live="polite">Загрузка этапов…</p><ol id="path-stages" class="path-list"></ol></main>
+  <footer class="site-footer">
+  <a class="brand" href="/">ПАСТУХ</a>
+  <p>Проект технологий для животноводства.</p>
+  <a href="/admin/index.php">Для команды ↗</a>
+</footer>
 </body>
 </html>

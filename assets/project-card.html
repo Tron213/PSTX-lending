@@ -5,13 +5,15 @@
   <meta name="viewport"
     content="width=device-width,initial-scale=1" />
   <title>ПАСТУХ — карточка проекта</title>
+  <script src="/site.js?v=redesign1"></script>
+  <link rel="stylesheet" href="/styles.css?v=redesign1" />
   <link rel="icon" href="/assets/mark.svg" />
   <style>
     * { box-sizing: border-box; }
     body {
       font-family: Arial, sans-serif;
-      color: #183d2e;
-      background: #f6f6ed;
+      color: var(--ink);
+      background: var(--bg);
       margin: 0;
       padding: 40px 24px;
     }
@@ -21,13 +23,13 @@
     p, li { line-height: 1.6; }
     .lead { font-size: 24px; }
     .stamp { font-size: 13px; letter-spacing: 2px; }
-    .note { padding: 18px; background: #e9eddf; }
+    .note { padding: 18px; background: var(--accent-soft); }
     a { color: inherit; }
     nav { display: flex; gap: 24px; }
     button { font: inherit; cursor: pointer; }
     footer { margin-top: 32px; font-size: 13px; }
     @media print {
-      body { background: white; padding: 0; }
+      body { background: white; color: #183d2e; padding: 0; }
       nav { display: none; }
       a { text-decoration: none; }
       main { max-width: none; }
@@ -40,6 +42,7 @@
   <main>
     <nav>
       <a href="/">← На сайт</a>
+      <button class="theme-toggle" type="button">Тема</button>
       <button type="button" id="print-card">
         Печать / сохранить в PDF
       </button>
